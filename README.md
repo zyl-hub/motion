@@ -32,16 +32,16 @@ zyl
 
 # 思想
 
-$\delta$ a_max to 0与时间的面积
+![](http://latex.codecogs.com/svg.latex?\Delta{v})是a_max to 0与时间的面积
 
-判断指标
+一些判断用的指标：
 
 period
 
 v阈值
 
-$\alpha$线性拟合系数
+![](http://latex.codecogs.com/svg.latex?\alpha)线性拟合系数用来表示在不同的速度情况下因为电机影响的速度值
 
-v+$\delta$v = $\alpha$v
+![](http://latex.codecogs.com/svg.latex?v+\Delta{v}=\alpha{v})
 
 安全区
