@@ -2,9 +2,16 @@ import matplotlib.pyplot as plt
 import json
 
 
-def loadData(dataType, dataOrder):
+# params:
+# showImgType : x, v or both
+# showImgDimension : x(0), y(1) or both(2)
+showImgType = ("all", "x", "v")
+showImgDimension = (0, 1, 2)
+
+
+def loadData(dataType, dataOrder, dataBase="test_data.json"):
     dataList = []
-    with open('test_data.json', 'r', encoding='utf') as fp:
+    with open(dataBase, 'r', encoding='utf') as fp:
         dataDict = json.load(fp)
         FinalDataDict = dataDict[dataType][dataOrder]
         dataList.append(FinalDataDict["x0"])
@@ -18,13 +25,13 @@ def loadData(dataType, dataOrder):
     return dataList
 
 
-def showImg(Dimension=1, x, y=[], vx, vy=[], time, type='all', DontShow=False):
-    if Dimension == 1:
-        if type == 'all':
-            plt.figure()
-            plt.xlabel('time')
-            plt.plot(time, x)
-            plt.plot(time, vx)
-            plt.show()
-
-    return 0
+# def showImg(x, y=[], vx, vy=[], time, type='all', Dimension=2, DontShow=True):
+#     if Dimension == 0:
+#         if type == 'all':
+#             plt.figure()
+#             plt.xlabel('time')
+#             plt.plot(time, x)
+#             plt.plot(time, vx)
+#             plt.show()
+#
+#     return 0
