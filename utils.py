@@ -1,12 +1,14 @@
 import matplotlib.pyplot as plt
 import json
+import time
 
 
 # params:
 # showImgType : x, v or both
-# showImgDimension : x(0), y(1) or both(2)
-showImgType = ("all", "x", "v")
+# showImgDimension : x(0), y(1) or otherwise(2)
+showImgType = ('x', 'v', 'xy', 'all')
 showImgDimension = (0, 1, 2)
+savePath = "Img/" + time.strftime('%Y-%m-%d-%H-%M-%S', time.localtime(time.time())) + "--"
 
 
 def loadData(dataType, dataOrder, dataBase="test_data.json"):
@@ -25,13 +27,66 @@ def loadData(dataType, dataOrder, dataBase="test_data.json"):
     return dataList
 
 
-# def showImg(x, y=[], vx, vy=[], time, type='all', Dimension=2, DontShow=True):
-#     if Dimension == 0:
-#         if type == 'all':
-#             plt.figure()
-#             plt.xlabel('time')
-#             plt.plot(time, x)
-#             plt.plot(time, vx)
-#             plt.show()
-#
-#     return 0
+def pltSingle(x, y, type, render=True):
+    plt.figure()
+    plt.title(type)
+    plt.xlabel(type[-1])
+    plt.ylabel(type[0:1])
+    plt.plot(x, y)
+    plt.savefig(savePath + type + ".png")
+    if render:
+        plt.show()
+    return
+
+
+def showImg(x, t, vx=None, y=None, vy=None, type='all', Dimension=0, render=True):
+    if Dimension == 0:
+        if type == 'x':
+            pltSingle(t, x, "xx-t", render)
+            return
+        if type == 'v':
+            pltSingle(t, vx, "vx-t", render)
+            return
+        if type == 'all':
+            pltSingle(t, x, "xx-t", render)
+            pltSingle(t, vx, "vx-t", render)
+            return
+
+    if Dimension == 1:
+        if type == 'x':
+            pltSingle(t, y, "yy-t", render)
+            return
+        if type == 'v':
+            pltSingle(t, vy, "vy-t", render)
+            return
+        if type == 'all':
+            pltSingle(t, y, "yy-t", render)
+            pltSingle(t, vy, "vy-t", render)
+            return
+
+    if Dimension == 2:
+        if type == 'x':
+            pltSingle(t, x, "xx-t", render)
+            pltSingle(t, y, "yy-t", render)
+            pltSingle(x, y, "yy-x", render)
+            return
+        if type == 'v':
+            pltSingle(t, vx, "vx-t", render)
+            pltSingle(t, vy, "vy-t", render)
+            return
+        if type == 'all':
+            pltSingle(t, x, "xx-t", render)
+            pltSingle(t, y, "yy-t", render)
+            pltSingle(x, y, "yy-x", render)
+            pltSingle(t, vx, "vx-t", render)
+            pltSingle(t, vy, "vy-t", render)
+            return
+
+
+t = [0, 1, 2, 3, 4, 5]
+x = [1 + i for i in t]
+y = [2 + i for i in t]
+vx = [3 + i for i in t]
+vy = [4 + i for i in t]
+showImg(x, t, vx, y, vy, "all", 2)
+
