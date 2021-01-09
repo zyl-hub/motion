@@ -105,11 +105,11 @@ def compute_2d(x_data_list, y_data_list, y_v=None):
                            y_last_all_info_dict)
                 y_data_list[0] = info[0]
                 y_data_list[2] = info[1]
-        if abs(x_data_list[0] - x_data_list[1]) < 1e-3:
+        if abs(x_data_list[0] - x_data_list[1]) < 1e-2:
             if(len(y_data_list) == 0):
                 break
             else:
-                if abs(y_data_list[0] - y_data_list[1]) < 1e-3:
+                if abs(y_data_list[0] - y_data_list[1]) < 1e-2:
                     break
 
         if epoch > 1000:
