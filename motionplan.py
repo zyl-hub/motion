@@ -27,6 +27,14 @@ def compute_1d(x, v0, v1, a_max, d_max, v_max, frame_rate, all_info_dict):
     if math.isinf(x) or math.isinf(v0) or math.isinf(v1):
         return
 
+    if abs(v0) > v_max:
+        all_info_dict["a"] = d_max
+        all_info_dict["dec_time"] = 1/frame_rate
+        all_info_dict["flat_time"] = 0
+        all_info_dict["acc_time"] = 0
+        all_info_dict["aord"] = 0
+        return
+
     if v0 * v1 > 0:
         if x * v0 > 0:
             if abs(v1) > abs(v0):
