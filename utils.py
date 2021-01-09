@@ -8,7 +8,8 @@ import time
 # showImgDimension : x(0), y(1) or otherwise(2)
 showImgType = ('x', 'v', 'xy', 'all')
 showImgDimension = (0, 1, 2)
-savePath = "Img/" + time.strftime('%Y-%m-%d-%H-%M-%S', time.localtime(time.time())) + "--"
+savePath = "Img/" + \
+    time.strftime('%Y-%m-%d-%H-%M-%S', time.localtime(time.time())) + "--"
 
 
 def loadData(dataType, dataOrder, dataBase="test_data.json"):
@@ -16,14 +17,14 @@ def loadData(dataType, dataOrder, dataBase="test_data.json"):
     with open(dataBase, 'r', encoding='utf') as fp:
         dataDict = json.load(fp)
         FinalDataDict = dataDict[dataType][dataOrder]
-        dataList.append(FinalDataDict["x0"])
-        dataList.append(FinalDataDict["x1"])
-        dataList.append(FinalDataDict["v0"])
-        dataList.append(FinalDataDict["v1"])
-        dataList.append(FinalDataDict["a_max"])
-        dataList.append(FinalDataDict["d_max"])
-        dataList.append(FinalDataDict["v_max"])
-        dataList.append(FinalDataDict["frame_rate"])
+        dataList.append(eval(FinalDataDict["x0"]))
+        dataList.append(eval(FinalDataDict["x1"]))
+        dataList.append(eval(FinalDataDict["v0"]))
+        dataList.append(eval(FinalDataDict["v1"]))
+        dataList.append(eval(FinalDataDict["a_max"]))
+        dataList.append(eval(FinalDataDict["d_max"]))
+        dataList.append(eval(FinalDataDict["v_max"]))
+        dataList.append(eval(FinalDataDict["frame_rate"]))
     return dataList
 
 
@@ -83,10 +84,9 @@ def showImg(x, t, vx=None, y=None, vy=None, type='all', Dimension=0, render=True
             return
 
 
-t = [0, 1, 2, 3, 4, 5]
-x = [1 + i for i in t]
-y = [2 + i for i in t]
-vx = [3 + i for i in t]
-vy = [4 + i for i in t]
-showImg(x, t, vx, y, vy, "all", 2)
-
+# t = [0, 1, 2, 3, 4, 5]
+# x = [1 + i for i in t]
+# y = [2 + i for i in t]
+# vx = [3 + i for i in t]
+# vy = [4 + i for i in t]
+# showImg(x, t, vx, y, vy, "all", 2)
