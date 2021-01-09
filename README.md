@@ -28,7 +28,7 @@ csy
 
 zyl
 
-- [ ] 画图(x-t, y-t, vx-t, vy-t, x-y)
+- [x] 画图(x-t, y-t, vx-t, vy-t, x-y)
 
 # 思想
 
