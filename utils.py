@@ -28,7 +28,10 @@ def loadData(dataType, dataOrder, dataBase="test_data.json"):
     return dataList
 
 
-def pltSingle(x, y, type, render=True):
+def pltSingle(x, y, type, epochNum, render=True):
+    if epochNum is not None:
+        x = x[0:epochNum]
+        y = y[0:epochNum]
     plt.figure()
     plt.title(type)
     plt.xlabel(type[-1])
@@ -40,47 +43,47 @@ def pltSingle(x, y, type, render=True):
     return
 
 
-def showImg(x, t, vx=None, y=None, vy=None, type='all', Dimension=0, render=True):
+def showImg(x, t, vx=None, y=None, vy=None, epochNum=None, type='all', Dimension=0, render=True):
     if Dimension == 0:
         if type == 'x':
-            pltSingle(t, x, "xx-t", render)
+            pltSingle(t, x, "xx-t", epochNum, render)
             return
         if type == 'v':
-            pltSingle(t, vx, "vx-t", render)
+            pltSingle(t, vx, "vx-t", epochNum, render)
             return
         if type == 'all':
-            pltSingle(t, x, "xx-t", render)
-            pltSingle(t, vx, "vx-t", render)
+            pltSingle(t, x, "xx-t", epochNum, render)
+            pltSingle(t, vx, "vx-t", epochNum, render)
             return
 
     if Dimension == 1:
         if type == 'x':
-            pltSingle(t, y, "yy-t", render)
+            pltSingle(t, y, "yy-t", epochNum, render)
             return
         if type == 'v':
-            pltSingle(t, vy, "vy-t", render)
+            pltSingle(t, vy, "vy-t", epochNum, render)
             return
         if type == 'all':
-            pltSingle(t, y, "yy-t", render)
-            pltSingle(t, vy, "vy-t", render)
+            pltSingle(t, y, "yy-t", epochNum, render)
+            pltSingle(t, vy, "vy-t", epochNum, render)
             return
 
     if Dimension == 2:
         if type == 'x':
-            pltSingle(t, x, "xx-t", render)
-            pltSingle(t, y, "yy-t", render)
-            pltSingle(x, y, "yy-x", render)
+            pltSingle(t, x, "xx-t", epochNum, render)
+            pltSingle(t, y, "yy-t", epochNum, render)
+            pltSingle(x, y, "yy-x", epochNum, render)
             return
         if type == 'v':
-            pltSingle(t, vx, "vx-t", render)
-            pltSingle(t, vy, "vy-t", render)
+            pltSingle(t, vx, "vx-t", epochNum, render)
+            pltSingle(t, vy, "vy-t", epochNum, render)
             return
         if type == 'all':
-            pltSingle(t, x, "xx-t", render)
-            pltSingle(t, y, "yy-t", render)
-            pltSingle(x, y, "yy-x", render)
-            pltSingle(t, vx, "vx-t", render)
-            pltSingle(t, vy, "vy-t", render)
+            pltSingle(t, x, "xx-t", epochNum, render)
+            pltSingle(t, y, "yy-t", epochNum, render)
+            pltSingle(x, y, "yy-x", epochNum, render)
+            pltSingle(t, vx, "vx-t", epochNum, render)
+            pltSingle(t, vy, "vy-t", epochNum, render)
             return
 
 
