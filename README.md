@@ -26,9 +26,11 @@ csy
 
 - [ ] 返回五个列表(x, y, vx, vy, time)
 
+a_or_d = 1是加速0是减速
+
 zyl
 
-- [ ] 画图(x-t, y-t, vx-t, vy-t, x-y)
+- [x] 画图(x-t, y-t, vx-t, vy-t, x-y)
 
 # 思想
 
