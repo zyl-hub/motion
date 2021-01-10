@@ -69,7 +69,6 @@ def pltSingle(x, v, t, a=None, epochNum=None, Dimension=0, render=True, debug=Fa
         ax2.legend(loc=2)
 
         ax1.set_title("Dimension = " + str(Dimension))
-        ax1.set_xlabel('Time/(epoch)')
         ax2.set_ylabel('x/(m)')
         ax1.set_ylabel('v/(m/s)')
 
@@ -77,7 +76,6 @@ def pltSingle(x, v, t, a=None, epochNum=None, Dimension=0, render=True, debug=Fa
         ax3.plot(t, a, 'r', label="a")
         ax3.legend(loc=1)
 
-        ax3.set_title("Dimension = " + str(Dimension))
         ax3.set_xlabel('Time/(epoch)')
         ax3.set_ylabel('a/(m/s2)')
 
