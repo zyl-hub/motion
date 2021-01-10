@@ -12,6 +12,8 @@
 
 - [ ] 加速度可以不是a_max和d_max, 加速减速flag
 
+- [ ] 把重要的图片放在ImportantImg中
+
 # 杂活
 
 hxy

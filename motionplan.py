@@ -1,6 +1,8 @@
 import math
 import matplotlib.pyplot as plt
 
+vzero = 0.01
+
 
 def copy_sign(a, b):
     if b >= 0:
@@ -80,9 +82,110 @@ def compute_1d(x, v0, v1, a_max, d_max, v_max, frame_rate, all_info_dict):
             elif abs(v1) < abs(v0):
                 total_t_v0_to_v1 = abs(v0 - v1) / d_max
                 total_x_v0_to_v1 = abs(v0 + v1) / 2 * total_t_v0_to_v1
+                # <++>
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
+                # 小量需要计算
                 if abs(x) <= total_x_v0_to_v1:
                     dec_time = (abs(v0) -
-                                math.sqrt(v0**2 - 2 * d_max * abs(x))) / d_max
+                                math.sqrt(abs(v0**2 - 2 * d_max * abs(x)))) / d_max
                     all_info_dict["acc_time"] += 0
                     all_info_dict["flat_time"] += 0
                     all_info_dict["dec_time"] += dec_time
@@ -120,7 +223,7 @@ def compute_1d(x, v0, v1, a_max, d_max, v_max, frame_rate, all_info_dict):
         elif x * v0 < 0:
             total_x_v0_to_0 = v0**2 / (2 * d_max)
             # ERROR
-            compute_1d(copy_sign(total_x_v0_to_0, -x), v0, copy_sign(1e-8, -x),
+            compute_1d(copy_sign(total_x_v0_to_0, -x), v0, copy_sign(vzero, -x),
                        a_max, d_max, v_max, frame_rate, all_info_dict)
             v_m = copy_sign(
                 math.sqrt((v0*v0/(2*d_max)+v1*v1/(2*a_max)+abs(x))/(1/(2*a_max)+1/(2*d_max))), -v0)
@@ -131,64 +234,67 @@ def compute_1d(x, v0, v1, a_max, d_max, v_max, frame_rate, all_info_dict):
             total_x_0_to_v_max = copy_sign((v_max*v_max)/(2*a_max), -v0)
             total_x_v_max_to_0 = copy_sign((v_max*v_max)/(2*d_max), -v0)
             if(abs(v_m) < v_max):
-                compute_1d(total_x_0_to_v1, copy_sign(1e-8, v1), v1,
+                compute_1d(total_x_0_to_v1, copy_sign(vzero, v1), v1,
                            a_max, d_max, v_max, frame_rate, all_info_dict)
-                compute_1d(total_x_v_m_to_0, v_m, copy_sign(1e-8, -v0),
+                compute_1d(total_x_v_m_to_0, v_m, copy_sign(vzero, -v0),
                            a_max, d_max, v_max, frame_rate, all_info_dict)
-                compute_1d(total_x_0_to_v_m, copy_sign(1e-8, -v0),
+                compute_1d(total_x_0_to_v_m, copy_sign(vzero, -v0),
                            v_m, a_max, d_max, v_max, frame_rate, all_info_dict)
-                compute_1d(total_x_v0_to_0, v0, copy_sign(1e-8, v0),
+                compute_1d(total_x_v0_to_0, v0, copy_sign(vzero, v0),
                            a_max, d_max, v_max, frame_rate, all_info_dict)
             else:
-                compute_1d(total_x_0_to_v1, copy_sign(1e-8, v1), v1,
+                compute_1d(total_x_0_to_v1, copy_sign(vzero, v1), v1,
                            a_max, d_max, v_max, frame_rate, all_info_dict)
                 compute_1d(total_x_v_max_to_0, v_max, copy_sign(
-                    1e-8, -v0), a_max, d_max, v_max, frame_rate, all_info_dict)
+                    vzero, -v0), a_max, d_max, v_max, frame_rate, all_info_dict)
                 compute_1d(x-total_x_v0_to_0-total_x_v_max_to_0-total_x_0_to_v1, copy_sign(
-                    1e-8, -v0), v_m, a_max, d_max, v_max, frame_rate, all_info_dict)
-                compute_1d(total_x_v0_to_0, v0, copy_sign(1e-8, v0),
+                    vzero, -v0), v_m, a_max, d_max, v_max, frame_rate, all_info_dict)
+                compute_1d(total_x_v0_to_0, v0, copy_sign(vzero, v0),
                            a_max, d_max, v_max, frame_rate, all_info_dict)
 
-            # compute_1d(copy_sign(total_x_v0_to_0+abs(x), x), copy_sign(1e-8, x), v1, a_max, d_max, v_max, frame_rate, all_info_dict)
+            # compute_1d(copy_sign(total_x_v0_to_0+abs(x), x), copy_sign(vzero, x), v1, a_max, d_max, v_max, frame_rate, all_info_dict)
             # compute_1d()
 
             return
 
     elif v0 * v1 < 0:
         if x * v0 >= 0:
-            v1 = copy_sign(min(abs(v1),5),v1)
-            total_x_0_to_v1=(v1**2) / (2 * a_max)
-            total_x_v0_to_0=(v0**2) / (2 * d_max)
+            v1 = copy_sign(min(abs(v1), 5), v1)
+            total_x_0_to_v1 = (v1**2) / (2 * a_max)
+            total_x_v0_to_0 = (v0**2) / (2 * d_max)
             compute_1d(copy_sign(total_x_0_to_v1, -x),
-                           copy_sign(1e-8, -x), v1, a_max, d_max, v_max,
-                           frame_rate, all_info_dict)
+                       copy_sign(vzero, -x), v1, a_max, d_max, v_max,
+                       frame_rate, all_info_dict)
 
-            compute_1d(copy_sign(abs(x)+total_x_0_to_v1, x), v0, copy_sign(1e-8, x), a_max, d_max,
-                           v_max, frame_rate, all_info_dict)
+            compute_1d(copy_sign(abs(x)+total_x_0_to_v1, x), v0, copy_sign(vzero, x), a_max, d_max,
+                       v_max, frame_rate, all_info_dict)
 
             # if total_x_v0_to_0 <= total_x_0_to_v1 + abs(x):
-                # compute_1d(copy_sign(total_x_0_to_v1, -x), copy_sign(1e-8, -x),
-                           # v1, a_max, d_max, v_max, frame_rate, all_info_dict)
+            # compute_1d(copy_sign(total_x_0_to_v1, -x), copy_sign(vzero, -x),
+            # v1, a_max, d_max, v_max, frame_rate, all_info_dict)
 
-                # compute_1d(copy_sign(total_x_0_to_v1 + abs(x), x), v0,
-                           # copy_sign(1e-8, x), a_max, d_max, v_max, frame_rate,
-                           # all_info_dict)
-                # return
+            # compute_1d(copy_sign(total_x_0_to_v1 + abs(x), x), v0,
+            # copy_sign(vzero, x), a_max, d_max, v_max, frame_rate,
+            # all_info_dict)
+            # return
             # elif total_x_v0_to_0 > total_x_0_to_v1 + abs(x):
-                # compute_1d(copy_sign(total_x_v0_to_0 - abs(x), -x),
-                           # copy_sign(1e-8, -x), v1, a_max, d_max, v_max,
-                           # frame_rate, all_info_dict)
+            # compute_1d(copy_sign(total_x_v0_to_0 - abs(x), -x),
+            # copy_sign(vzero, -x), v1, a_max, d_max, v_max,
+            # frame_rate, all_info_dict)
 
-                # compute_1d(copy_sign(total_x_v0_to_0, x), v0, copy_sign(1e-8, x), a_max, d_max,
-                           # v_max, frame_rate, all_info_dict)
-                # return
+            # compute_1d(copy_sign(total_x_v0_to_0, x), v0, copy_sign(vzero, x), a_max, d_max,
+            # v_max, frame_rate, all_info_dict)
+            # return
 
         elif x * v0 < 0:
-            total_x_v0_to_0=v0**2 / (2 * d_max)
+            total_x_v0_to_0 = v0**2 / (2 * d_max)
             compute_1d(copy_sign(total_x_v0_to_0 + abs(x), x),
-                       copy_sign(1e-8, x), v1, a_max, d_max, v_max, frame_rate,
+                       copy_sign(
+                           vzero, x), v1, a_max, d_max, v_max, frame_rate,
                        all_info_dict)
 
-            compute_1d(copy_sign(total_x_v0_to_0, -x), v0, copy_sign(1e-8, x),
+            # compute_1d(copy_sign(total_x_v0_to_0, -x), v0, copy_sign(vzero, x),
+            # a_max, d_max, v_max, frame_rate, all_info_dict)
+            compute_1d(copy_sign(total_x_v0_to_0, -x), v0, copy_sign(vzero, -x),
                        a_max, d_max, v_max, frame_rate, all_info_dict)
             return

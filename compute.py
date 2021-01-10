@@ -81,6 +81,7 @@ def compute_2d(x_data_list, y_data_list, y_v=None):
                 y_data_list[2] = info[1]
         else:
             # 计算x方向
+            a_x.append(x_last_all_info_dict["a"])
             x.append(x_data_list[0])
             v_x.append(x_data_list[2])
             info = compute(x_data_list[0], x_data_list[2], x_last_all_info_dict["a"],
@@ -98,6 +99,7 @@ def compute_2d(x_data_list, y_data_list, y_v=None):
             if (len(y_data_list) == 0):
                 pass
             else:
+                a_y.append(y_last_all_info_dict["a"])
                 y.append(x_data_list[0])
                 v_y.append(x_data_list[2])
                 info = compute(y_data_list[0], y_data_list[2], y_last_all_info_dict["a"], y_data_list[7],
