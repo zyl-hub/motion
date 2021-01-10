@@ -55,8 +55,10 @@ def compute_2d(x_data_list, y_data_list, y_v=None):
                        x_last_all_info_dict)
             x.append(x_data_list[0])
             v_x.append(x_data_list[2])
-            a_x.append(x_last_all_info_dict["a"])
-
+            if x_last_all_info_dict["aord"]:
+                a_x.append(abs(x_last_all_info_dict["a"]))
+            else:
+                a_x.append(-abs(x_last_all_info_dict["a"]))
             info = compute(
                 x_data_list[0], x_data_list[2], 0, x_data_list[7], 1, x_data_list[6])
             x_data_list[0] = info[0]
@@ -74,14 +76,19 @@ def compute_2d(x_data_list, y_data_list, y_v=None):
                            y_last_all_info_dict)
                 y.append(x_data_list[0])
                 v_y.append(x_data_list[2])
-                a_y.append(y_last_all_info_dict["a"])
+                if y_last_all_info_dict["aord"]:
+                    a_y.append(abs(y_last_all_info_dict["a"]))
+                else:
+                    a_y.append(-abs(y_last_all_info_dict["a"]))
                 info = compute(
                     y_data_list[0], y_data_list[2], 0, y_data_list[7], 1, y_data_list[6])
                 y_data_list[0] = info[0]
                 y_data_list[2] = info[1]
         else:
-            # 计算x方向
-            a_x.append(x_last_all_info_dict["a"])
+            if x_last_all_info_dict["aord"]:
+                a_x.append(abs(x_last_all_info_dict["a"]))
+            else:
+                a_x.append(-abs(x_last_all_info_dict["a"]))
             x.append(x_data_list[0])
             v_x.append(x_data_list[2])
             info = compute(x_data_list[0], x_data_list[2], x_last_all_info_dict["a"],
@@ -99,7 +106,10 @@ def compute_2d(x_data_list, y_data_list, y_v=None):
             if (len(y_data_list) == 0):
                 pass
             else:
-                a_y.append(y_last_all_info_dict["a"])
+                if y_last_all_info_dict["aord"]:
+                    a_y.append(abs(y_last_all_info_dict["a"]))
+                else:
+                    a_y.append(-abs(y_last_all_info_dict["a"]))
                 y.append(x_data_list[0])
                 v_y.append(x_data_list[2])
                 info = compute(y_data_list[0], y_data_list[2], y_last_all_info_dict["a"], y_data_list[7],

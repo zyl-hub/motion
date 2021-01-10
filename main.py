@@ -3,7 +3,7 @@ from compute import *
 
 
 if __name__ == '__main__':
-    x_data_list = loadData("state1", "1")
+    x_data_list = loadData("state2", "1")
     y_data_list = loadData("state1", "1")
     x, y, vx, vy, ax, ay, t = compute_2d(x_data_list, y_data_list)
     showImg(x, vx, t, ax, y, vy, ay, 200, 0, render=True, debug=True)
