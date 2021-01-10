@@ -4,9 +4,7 @@ import time
 
 
 # params:
-# showImgType : x, v or both
 # showImgDimension : x(0), y(1) or otherwise(2)
-showImgType = ('x', 'v', 'xy', 'all')
 showImgDimension = (0, 1, 2)
 savePath = "Img/" + \
     time.strftime('%Y-%m-%d-%H-%M-%S', time.localtime(time.time())) + "--"
@@ -28,64 +26,42 @@ def loadData(dataType, dataOrder, dataBase="test_data.json"):
     return dataList
 
 
-def pltSingle(x, y, type, epochNum, render=True):
+def pltSingle(x, v, t, epochNum=None, Dimension=0, render=True):
     if epochNum is not None:
         x = x[0:epochNum]
-        y = y[0:epochNum]
-    plt.figure()
-    plt.title(type)
-    plt.xlabel(type[-1])
-    plt.ylabel(type[0:1])
-    plt.plot(x, y)
-    plt.savefig(savePath + type + ".png")
+        v = v[0:epochNum]
+        t = t[0:epochNum]
+
+    fig = plt.figure()
+
+    ax1 = fig.add_subplot(111)
+    ax1.plot(t, v, 'r', label="v")
+    ax1.legend(loc=1)
+
+    ax2 = ax1.twinx()
+    ax2.plot(t, x, 'g', label="x")
+    ax2.legend(loc=2)
+
+    ax1.set_title("Dimension = " + str(Dimension))
+    ax1.set_xlabel('Time/(epoch)')
+    ax2.set_ylabel('x/(m)')
+    ax1.set_ylabel('v/(m/s)')
+    plt.savefig(savePath + str(Dimension) + ".png")
     if render:
         plt.show()
     return
 
 
-def showImg(x, t, vx=None, y=None, vy=None, epochNum=None, type='all', Dimension=0, render=True):
+def showImg(x, vx, t, y=None, vy=None, epochNum=None, Dimension=0, render=True):
     if Dimension == 0:
-        if type == 'x':
-            pltSingle(t, x, "xx-t", epochNum, render)
-            return
-        if type == 'v':
-            pltSingle(t, vx, "vx-t", epochNum, render)
-            return
-        if type == 'all':
-            pltSingle(t, x, "xx-t", epochNum, render)
-            pltSingle(t, vx, "vx-t", epochNum, render)
-            return
+        pltSingle(x, vx, t, epochNum, Dimension, render)
 
     if Dimension == 1:
-        if type == 'x':
-            pltSingle(t, y, "yy-t", epochNum, render)
-            return
-        if type == 'v':
-            pltSingle(t, vy, "vy-t", epochNum, render)
-            return
-        if type == 'all':
-            pltSingle(t, y, "yy-t", epochNum, render)
-            pltSingle(t, vy, "vy-t", epochNum, render)
-            return
+        pltSingle(y, vy, t, epochNum, Dimension, render)
 
     if Dimension == 2:
-        if type == 'x':
-            pltSingle(t, x, "xx-t", epochNum, render)
-            pltSingle(t, y, "yy-t", epochNum, render)
-            pltSingle(x, y, "yy-x", epochNum, render)
-            return
-        if type == 'v':
-            pltSingle(t, vx, "vx-t", epochNum, render)
-            pltSingle(t, vy, "vy-t", epochNum, render)
-            return
-        if type == 'all':
-            pltSingle(t, x, "xx-t", epochNum, render)
-            pltSingle(t, y, "yy-t", epochNum, render)
-            pltSingle(x, y, "yy-x", epochNum, render)
-            pltSingle(t, vx, "vx-t", epochNum, render)
-            pltSingle(t, vy, "vy-t", epochNum, render)
-            return
-
+        pltSingle(x, vx, t, epochNum, Dimension, render)
+        pltSingle(y, vy, t, epochNum, Dimension, render)
 
 # t = [0, 1, 2, 3, 4, 5]
 # x = [1 + i for i in t]
