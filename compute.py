@@ -17,7 +17,7 @@ def compute(x0, v0, a, frame_rate, aord, v_max):
     return x, v
 
 
-def compute_2d(x_data_list, y_data_list, y_v=None):
+def compute_2d(x_data_list, y_data_list, y_v=None,epoch_num = 2000):
     # compute x
     x = []
     y = []
@@ -131,7 +131,7 @@ def compute_2d(x_data_list, y_data_list, y_v=None):
                 if abs(y_data_list[0] - y_data_list[1]) < 1e-2:
                     break
 
-        if epoch > 1000:
+        if epoch > epoch_num:
             break
 
         epoch += 1
