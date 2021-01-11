@@ -22,11 +22,11 @@ hxy
 
 - [x] 返回两个len 8的列表(x0, x1, v0, v1, a_max, d_max, v_max, frame_rate)
 
-- [ ] 测试可用性
+- [x] 测试可用性
 
 csy
 
-- [ ] 返回五个列表(x, y, vx, vy, time)
+- [x] 返回五个列表(x, y, vx, vy, time)
 
 a_or_d = 1是加速0是减速
 
