@@ -57,8 +57,9 @@ def compute_1d(x, v0, v1, a_max, d_max, v_max, frame_rate, all_info_dict):
                     total_x_v0_to_v_max = abs(v_max**2 - v0**2) / (2 * a_max)
                     total_x_v_max_to_v1 = abs(v_max**2 - v1**2) / (2 * d_max)
                     total_x = total_x_v0_to_v_max + total_x_v_max_to_v1
+                    # 改成由vm判断
                     # state2
-                    if abs(x) >= total_x:
+                    if (abs(x) - total_x)>=0:
                         acc_time = (v_max - abs(v0)) / a_max
                         flat_time = (abs(x) - total_x) / v_max
                         dec_time = (v_max - abs(v1)) / d_max
@@ -69,10 +70,12 @@ def compute_1d(x, v0, v1, a_max, d_max, v_max, frame_rate, all_info_dict):
                         all_info_dict["aord"] = 1
                         return
                     # state3
-                    elif abs(x) < total_x:
+                    elif (abs(x) - total_x)<0:
                         v_m = math.sqrt(
                             (2 * a_max * d_max * abs(x) + d_max * v0 * v0 +
-                             a_max * v1 * v1) / (a_max + d_max))
+                             a_max * v1 * v1) / (a_max + d_max))-0.5
+                        # v_m = 0
+                        print("vm:",v_m)
                         acc_time = (v_m - abs(v0)) / a_max
                         flat_time = 0
                         dec_time = (v_m - abs(v1)) / d_max
