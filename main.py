@@ -3,16 +3,16 @@ from compute import *
 
 
 if __name__ == '__main__':
-    x_data_list = loadData("state9", "5")
+    x_data_list = loadData("state10", "1")
     print(x_data_list)
     # y_data_list = loadData("state2", "1")
 
-    #0:部分手输
-    #1:全部手输
+    # 0:部分手输
+    # 1:全部手输
     # x_data_list = loadDataByHand(0)
     # y_data_list = loadDataByHand(0)
 
-    x, y, vx, vy, ax, ay, t = compute_2d(x_data_list, [],epoch_num=2000)
+    x, y, vx, vy, ax, ay, t = compute_2d(x_data_list, [], epoch_num=2000)
     print("epoch:", len(x))
     print("v:", vx[len(vx)-1])
     print("v_m:", max(vx[0:500]))
@@ -23,6 +23,7 @@ if __name__ == '__main__':
     # print(vx[100:130])
     # print(x[850:900])
     print(ax[850:900])
-    showImg(x[:], vx[:], t[:], ax[:], y[:], vy[:], ay[:], 5000, 0, render=True, debug=True)
+    showImg(x[:], vx[:], t[:], ax[:], y[:], vy[:],
+            ay[:], 5000, 0, render=True, debug=True)
     # showImg(x, vx, t, y, vy, 200, 1)
     # showImg(x, vx, t, y, vy, 200, 2)

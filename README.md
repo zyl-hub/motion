@@ -17,15 +17,26 @@
 # 进度
 
 - [x] state1
+
 - [x] state2
+
 - [x] state3
+
 - [x] state4
+
 - [x] state5
+
 - [x] state6
+
 - [ ] state7
+
 - [ ] state8
-- [ ] state9
+
+- [x] state9
+
 - [x] state10
+
+- [ ] state9和state10需要多加亿点点情况
 
 # 杂活
 
