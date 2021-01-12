@@ -25,6 +25,27 @@ def loadData(dataType, dataOrder, dataBase="test_data.json"):
         dataList.append(eval(FinalDataDict["frame_rate"]))
     return dataList
 
+def loadDataByHand(all_data):
+    default_a_max = 5
+    default_d_max = 4
+    default_v_max = 10
+    default_frame_rate = 75
+    dataList = []
+    dataList.append(eval(input("x0:")))
+    dataList.append(eval(input("x1:")))
+    dataList.append(eval(input("v0:")))
+    dataList.append(eval(input("v0:")))
+    if all_data:
+        dataList.append(eval(input("a_max:")))
+        dataList.append(eval(input("d_max:")))
+        dataList.append(eval(input("v_max:")))
+        dataList.append(eval(input("frame_rate:")))
+    else:
+        dataList.append(default_a_max)
+        dataList.append(default_d_max)
+        dataList.append(default_v_max)
+        dataList.append(default_frame_rate)
+    return dataList
 
 def pltSingle(x, v, t, a=None, epochNum=None, Dimension=0, render=True, debug=False):
     if not debug:
