@@ -24,6 +24,7 @@ def compute_1d(x, v0, v1, a_max, d_max, v_max, frame_rate, all_info_dict):
         all_info_dict["flat_time"] = 0
         all_info_dict["acc_time"] = 0
         all_info_dict["aord"] = 0
+        print("sb")
         return
 
     if math.isinf(x) or math.isinf(v0) or math.isinf(v1):
@@ -39,7 +40,10 @@ def compute_1d(x, v0, v1, a_max, d_max, v_max, frame_rate, all_info_dict):
         return
 
     if abs(abs(v0)-v_max) < 0.05*v_max:
-        total_x_v0_to_v1 = abs((v0+v1)/2*(v0-v1)/d_max)
+        if v1 * v0 > 0:
+            total_x_v0_to_v1 = abs((v0+v1)/2*(v0-v1)/d_max)
+        else:
+            total_x_v0_to_v1 = v0*v0/(2*d_max) - v1*v1/(2*a_max)
         if total_x_v0_to_v1 < abs(x):
             all_info_dict["a"] = 0
             all_info_dict["aord"] = 0
@@ -153,16 +157,16 @@ def compute_1d(x, v0, v1, a_max, d_max, v_max, frame_rate, all_info_dict):
                         all_info_dict["dec_time"] += dec_time
                         all_info_dict["a"] = a_max
                         all_info_dict["aord"] = 1
-                        if abs(v_m - abs(v0)) < a_max/frame_rate:
+                        if v_m - abs(v0) < a_max/frame_rate:
                             all_info_dict["a"] = 0
-                        print("state6:", "x:", x, "\t","v0:", v0, "\t", "v1:", v1,"\t","a:",all_info_dict["a"])
+                        print("state6:", "x:", x, "\t","v0:", v0, "\t", "v1:", v1,"\t","a:",all_info_dict["a"],"\t","v_m:",v_m)
                         return
 
         elif x * v0 < 0:
             total_x_v0_to_0 = v0**2 / (2 * d_max)
             # ERROR
-            compute_1d(copy_sign(total_x_v0_to_0, -x), v0, copy_sign(vzero, -x),
-                       a_max, d_max, v_max, frame_rate, all_info_dict)
+            # compute_1d(copy_sign(total_x_v0_to_0, -x), v0, copy_sign(vzero, -x),
+            #            a_max, d_max, v_max, frame_rate, all_info_dict)
             v_m = copy_sign(
                 math.sqrt((v0*v0/(2*d_max)+v1*v1/(2*a_max)+abs(x))/(1/(2*a_max)+1/(2*d_max))), -v0)
             total_x_v0_to_0 = copy_sign((v0*v0)/(2*d_max), v0)
@@ -174,15 +178,23 @@ def compute_1d(x, v0, v1, a_max, d_max, v_max, frame_rate, all_info_dict):
             # state7
             if(abs(v_m) < v_max):
                 print("state7:")
-                compute_1d(total_x_0_to_v1, copy_sign(vzero, v1), v1,
-                           a_max, d_max, v_max, frame_rate, all_info_dict)
-                compute_1d(total_x_v_m_to_0, v_m, copy_sign(vzero, -v0),
-                           a_max, d_max, v_max, frame_rate, all_info_dict)
-                compute_1d(total_x_0_to_v_m, copy_sign(vzero, -v0),
-                           v_m, a_max, d_max, v_max, frame_rate, all_info_dict)
-                compute_1d(total_x_v0_to_0, v0, copy_sign(vzero, v0),
-                           a_max, d_max, v_max, frame_rate, all_info_dict)
+                # compute_1d(total_x_0_to_v1, copy_sign(vzero, v1), v1,
+                #            a_max, d_max, v_max, frame_rate, all_info_dict)
+                # compute_1d(total_x_v_m_to_0, v_m, copy_sign(vzero, -v0),
+                #            a_max, d_max, v_max, frame_rate, all_info_dict)
+                # compute_1d(total_x_0_to_v_m, copy_sign(vzero, -v0),
+                #            v_m, a_max, d_max, v_max, frame_rate, all_info_dict)
+                # compute_1d(total_x_v0_to_0, v0, copy_sign(vzero, v0),
+                #            a_max, d_max, v_max, frame_rate, all_info_dict)
+                if abs(v0) > 0.015:
+                    #time
+                    compute_1d(total_x_v0_to_0, v0, copy_sign(vzero, v0),
+                               a_max, d_max, v_max, frame_rate, all_info_dict)
+                else:
+                    compute_1d(copy_sign(abs(x)+total_x_v0_to_0,x),copy_sign(vzero,x),v1,
+                               a_max, d_max, v_max, frame_rate, all_info_dict)
                 print("state7:", "x:", x, "\t", "v0:", v0, "\t", "v1:", v1, "\t", "a:", all_info_dict["a"])
+                return
             # state8
             else:
                 print("state8:")
