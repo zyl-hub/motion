@@ -128,12 +128,12 @@ def compute_2d(x_data_list, y_data_list, y_v=None,epoch_num = 2000):
                            y_last_all_info_dict)
                 y_data_list[0] = info[0]
                 y_data_list[2] = info[1]
-        if abs(x_data_list[0] - x_data_list[1]) < x_data_list[2] / x_data_list[7]:
-            if(len(y_data_list) == 0):
-                break
-            else:
-                if abs(y_data_list[0] - y_data_list[1]) < y_data_list[2] / y_data_list[7]:
-                    break
+        # if abs(x_data_list[0] - x_data_list[1]) < x_data_list[2] / x_data_list[7]:
+        #     if(len(y_data_list) == 0):
+        #         break
+        #     else:
+        #         if abs(y_data_list[0] - y_data_list[1]) < y_data_list[2] / y_data_list[7]:
+        #             break
 
         if epoch > epoch_num:
             break

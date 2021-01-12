@@ -73,7 +73,7 @@ def compute_1d(x, v0, v1, a_max, d_max, v_max, frame_rate, all_info_dict):
                     # 改成由vm判断
                     # state2 Done
                     if (abs(x) - total_x) >= 0:
-                        print("state2:","v0:",v0,"\t","v1:",v1)
+                        print("state4:", "x:", x, "\t","v0:", v0, "\t", "v1:", v1,"\t","a:",all_info_dict["a"])
                         acc_time = (v_max - abs(v0)) / a_max
                         flat_time = (abs(x) - total_x) / v_max
                         dec_time = (v_max - abs(v1)) / d_max
@@ -88,7 +88,7 @@ def compute_1d(x, v0, v1, a_max, d_max, v_max, frame_rate, all_info_dict):
                         print("state3:", v0)
                         v_m = math.sqrt(
                             (2 * a_max * d_max * abs(x) + d_max * v0 * v0 +
-                             a_max * v1 * v1) / (a_max + d_max))-0.5
+                             a_max * v1 * v1) / (a_max + d_max))
                         acc_time = (v_m - abs(v0)) / a_max
                         flat_time = 0
                         dec_time = (v_m - abs(v1)) / d_max
@@ -108,7 +108,7 @@ def compute_1d(x, v0, v1, a_max, d_max, v_max, frame_rate, all_info_dict):
                 # <++>
                 # 小量需要计算
                 # state4
-                if abs(x) <= total_x_v0_to_v1:
+                if abs(abs(x) - total_x_v0_to_v1) < 0.01:# 参数
                     dec_time = (abs(v0) -
                                 math.sqrt(abs(v0**2 - 2 * d_max * abs(x)))) / d_max
                     all_info_dict["acc_time"] += 0
@@ -116,9 +116,9 @@ def compute_1d(x, v0, v1, a_max, d_max, v_max, frame_rate, all_info_dict):
                     all_info_dict["dec_time"] += dec_time
                     all_info_dict["a"] = d_max
                     all_info_dict["aord"] = 0
-                    print("state4:", "v0:", v0, "\t", "v1:", v1,"\t","a:",all_info_dict["a"])
+                    print("state4:", "x:", x, "\t","v0:", v0, "\t", "v1:", v1,"\t","a:",all_info_dict["a"])
                     return
-                elif abs(x) > total_x_v0_to_v1:
+                elif abs(abs(x) - total_x_v0_to_v1) >= 0.01: #参数
                     total_x_v0_to_v_max = abs(v_max**2 - v0**2) / (2 * a_max)
                     total_x_v_max_to_v1 = abs(v_max**2 - v1**2) / (2 * d_max)
                     total_x = total_x_v0_to_v_max + total_x_v_max_to_v1
@@ -199,10 +199,10 @@ def compute_1d(x, v0, v1, a_max, d_max, v_max, frame_rate, all_info_dict):
             print("state9:", v0)
             v1 = copy_sign(min(abs(v1), 5), v1)
             total_x_0_to_v1 = (v1**2) / (2 * a_max)
-            total_x_v0_to_0 = (v0**2) / (2 * d_max)
-            compute_1d(copy_sign(total_x_0_to_v1, -x),
-                       copy_sign(vzero, -x), v1, a_max, d_max, v_max,
-                       frame_rate, all_info_dict)
+            # total_x_v0_to_0 = (v0**2) / (2 * d_max)
+            # compute_1d(copy_sign(total_x_0_to_v1, -x),
+            #            copy_sign(vzero, -x), v1, a_max, d_max, v_max,
+            #            frame_rate, all_info_dict)
 
             compute_1d(copy_sign(abs(x)+total_x_0_to_v1, x), v0, copy_sign(vzero, x), a_max, d_max,
                        v_max, frame_rate, all_info_dict)
@@ -228,13 +228,31 @@ def compute_1d(x, v0, v1, a_max, d_max, v_max, frame_rate, all_info_dict):
         elif x * v0 < 0:
             print("state10:", v0)
             total_x_v0_to_0 = v0**2 / (2 * d_max)
-            compute_1d(copy_sign(total_x_v0_to_0 + abs(x), x),
-                       copy_sign(
-                           vzero, x), v1, a_max, d_max, v_max, frame_rate,
+            if v0 * v1 < 0 and abs(v0)>0.015:
+                compute_1d(copy_sign(total_x_v0_to_0 + abs(x), x),
+                       copy_sign(vzero, x),
+                       v1,
+                       a_max,
+                       d_max,
+                       v_max,
+                       frame_rate,
                        all_info_dict)
 
-            # compute_1d(copy_sign(total_x_v0_to_0, -x), v0, copy_sign(vzero, x),
-            # a_max, d_max, v_max, frame_rate, all_info_dict)
-            compute_1d(copy_sign(total_x_v0_to_0, -x), v0, copy_sign(vzero, -x),
+                # compute_1d(copy_sign(total_x_v0_to_0, -x), v0, copy_sign(vzero, x),
+                # a_max, d_max, v_max, frame_rate, all_info_dict)
+                compute_1d(copy_sign(total_x_v0_to_0, -x), v0, copy_sign(vzero, -x),
                        a_max, d_max, v_max, frame_rate, all_info_dict)
+            else:
+                # compute_1d(copy_sign(total_x_v0_to_0, -x), v0, copy_sign(vzero, x),
+                # a_max, d_max, v_max, frame_rate, all_info_dict)
+                compute_1d(copy_sign(total_x_v0_to_0, -x), v0, copy_sign(vzero, -x),
+                           a_max, d_max, v_max, frame_rate, all_info_dict)
+                compute_1d(copy_sign(total_x_v0_to_0 + abs(x), x),
+                           copy_sign(vzero, x),
+                           v1,
+                           a_max,
+                           d_max,
+                           v_max,
+                           frame_rate,
+                           all_info_dict)
             return
