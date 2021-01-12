@@ -73,7 +73,7 @@ def compute_1d(x, v0, v1, a_max, d_max, v_max, frame_rate, all_info_dict):
                     # 改成由vm判断
                     # state2 Done
                     if (abs(x) - total_x) >= 0:
-                        print("state2:",v0)
+                        print("state2:","v0:",v0,"\t","v1:",v1)
                         acc_time = (v_max - abs(v0)) / a_max
                         flat_time = (abs(x) - total_x) / v_max
                         dec_time = (v_max - abs(v1)) / d_max
@@ -109,7 +109,6 @@ def compute_1d(x, v0, v1, a_max, d_max, v_max, frame_rate, all_info_dict):
                 # 小量需要计算
                 # state4
                 if abs(x) <= total_x_v0_to_v1:
-                    print("state4:",v0)
                     dec_time = (abs(v0) -
                                 math.sqrt(abs(v0**2 - 2 * d_max * abs(x)))) / d_max
                     all_info_dict["acc_time"] += 0
@@ -117,6 +116,7 @@ def compute_1d(x, v0, v1, a_max, d_max, v_max, frame_rate, all_info_dict):
                     all_info_dict["dec_time"] += dec_time
                     all_info_dict["a"] = d_max
                     all_info_dict["aord"] = 0
+                    print("state4:", "v0:", v0, "\t", "v1:", v1,"\t","a:",all_info_dict["a"])
                     return
                 elif abs(x) > total_x_v0_to_v1:
                     total_x_v0_to_v_max = abs(v_max**2 - v0**2) / (2 * a_max)
@@ -124,7 +124,6 @@ def compute_1d(x, v0, v1, a_max, d_max, v_max, frame_rate, all_info_dict):
                     total_x = total_x_v0_to_v_max + total_x_v_max_to_v1
                     # state5
                     if(abs(x) > total_x):
-                        print("state5:",v0)
                         acc_time = (abs(v_max)-abs(v0))/a_max
                         flat_time = (abs(x)-total_x)/v_max
                         dec_time = (v_max-abs(v1))/d_max
@@ -133,10 +132,10 @@ def compute_1d(x, v0, v1, a_max, d_max, v_max, frame_rate, all_info_dict):
                         all_info_dict["dec_time"] += dec_time
                         all_info_dict["a"] = a_max
                         all_info_dict["aord"] = 1
+                        print("state5:", "v0:", v0, "\t", "v1:", v1, "\t", "a:", all_info_dict["a"])
                         return
                     # state6
                     else:
-                        print("state6:",v0)
                         v_m = math.sqrt(
                             (2 * a_max * d_max * abs(x) + d_max * v0 * v0 +
                              a_max * v1 * v1) / (a_max + d_max))
@@ -150,6 +149,7 @@ def compute_1d(x, v0, v1, a_max, d_max, v_max, frame_rate, all_info_dict):
                         all_info_dict["aord"] = 1
                         if abs(v_m - abs(v0)) < a_max/frame_rate:
                             all_info_dict["a"] = 0
+                        print("state6:", "v0:", v0, "\t", "v1:", v1, "\t", "a:", all_info_dict["a"])
                         return
 
         elif x * v0 < 0:

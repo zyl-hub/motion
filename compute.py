@@ -45,6 +45,7 @@ def compute_2d(x_data_list, y_data_list, y_v=None,epoch_num = 2000):
                            "acc_time": 0}
     while(1):
         if(epoch == 0):
+            print(epoch,":",end="")
             compute_1d(x_data_list[1]-x_data_list[0],
                        x_data_list[2],
                        x_data_list[3],
@@ -66,6 +67,7 @@ def compute_2d(x_data_list, y_data_list, y_v=None,epoch_num = 2000):
             if(len(y_data_list) == 0):
                 pass
             else:
+                print(epoch, ":", end="")
                 compute_1d(y_data_list[1] - y_data_list[0],
                            y_data_list[2],
                            y_data_list[3],
@@ -93,6 +95,7 @@ def compute_2d(x_data_list, y_data_list, y_v=None,epoch_num = 2000):
             v_x.append(x_data_list[2])
             info = compute(x_data_list[0], x_data_list[2], x_last_all_info_dict["a"],
                            x_data_list[7], x_last_all_info_dict["aord"], x_data_list[6])
+            print(epoch, ":", end="")
             compute_1d(x_data_list[1] - x_data_list[0],
                        x_data_list[2],
                        x_data_list[3],
@@ -114,6 +117,7 @@ def compute_2d(x_data_list, y_data_list, y_v=None,epoch_num = 2000):
                 v_y.append(x_data_list[2])
                 info = compute(y_data_list[0], y_data_list[2], y_last_all_info_dict["a"], y_data_list[7],
                                y_last_all_info_dict["aord"], y_data_list[6])
+                print(epoch, ":", end="")
                 compute_1d(y_data_list[1] - x_data_list[0],
                            y_data_list[2],
                            y_data_list[3],
@@ -124,11 +128,11 @@ def compute_2d(x_data_list, y_data_list, y_v=None,epoch_num = 2000):
                            y_last_all_info_dict)
                 y_data_list[0] = info[0]
                 y_data_list[2] = info[1]
-        if abs(x_data_list[0] - x_data_list[1]) < 1e-2:
+        if abs(x_data_list[0] - x_data_list[1]) < x_data_list[2] / x_data_list[7]:
             if(len(y_data_list) == 0):
                 break
             else:
-                if abs(y_data_list[0] - y_data_list[1]) < 1e-2:
+                if abs(y_data_list[0] - y_data_list[1]) < y_data_list[2] / y_data_list[7]:
                     break
 
         if epoch > epoch_num:

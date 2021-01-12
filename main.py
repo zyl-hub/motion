@@ -3,9 +3,9 @@ from compute import *
 
 
 if __name__ == '__main__':
-    x_data_list = loadData("state3", "2")
+    x_data_list = loadData("state6", "2")
     # y_data_list = loadData("state2", "1")
-    x, y, vx, vy, ax, ay, t = compute_2d(x_data_list, [],epoch_num=200)
+    x, y, vx, vy, ax, ay, t = compute_2d(x_data_list, [],epoch_num=2000)
     print("epoch:", len(x))
     print("v:", vx[len(vx)-1])
     print("v_m:", max(vx[0:150]))

@@ -47,7 +47,7 @@ def pltSingle(x, v, t, a=None, epochNum=None, Dimension=0, render=True, debug=Fa
         ax1.set_xlabel('Time/(epoch)')
         ax2.set_ylabel('x/(m)')
         ax1.set_ylabel('v/(m/s)')
-        plt.savefig(savePath + str(Dimension) + ".png")
+        # plt.savefig(savePath + str(Dimension) + ".png")
         if render:
             plt.show()
         return
@@ -79,7 +79,7 @@ def pltSingle(x, v, t, a=None, epochNum=None, Dimension=0, render=True, debug=Fa
         ax3.set_xlabel('Time/(epoch)')
         ax3.set_ylabel('a/(m/s2)')
 
-        plt.savefig(savePath + str(Dimension) + ".png")
+        # plt.savefig(savePath + str(Dimension) + ".png")
         if render:
             plt.show()
         return
