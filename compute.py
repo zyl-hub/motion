@@ -17,7 +17,7 @@ def compute(x0, v0, a, frame_rate, aord, v_max):
     return x, v
 
 
-def compute_2d(x_data_list, y_data_list, y_v=None,epoch_num = 2000):
+def compute_2d(x_data_list, y_data_list, y_v=None, epoch_num=2000):
     # compute x
     x = []
     y = []
@@ -36,7 +36,7 @@ def compute_2d(x_data_list, y_data_list, y_v=None,epoch_num = 2000):
                             "acc_time": 0}
     while(1):
         if(epoch == 0):
-            print(epoch,":",end="")
+            print(epoch, ":", end="")
             compute_1d(x_data_list[1]-x_data_list[0],
                        x_data_list[2],
                        x_data_list[3],

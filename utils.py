@@ -25,6 +25,7 @@ def loadData(dataType, dataOrder, dataBase="test_data.json"):
         dataList.append(eval(FinalDataDict["frame_rate"]))
     return dataList
 
+
 def loadDataByHand(all_data):
     default_a_max = 5
     default_d_max = 4
@@ -47,7 +48,8 @@ def loadDataByHand(all_data):
         dataList.append(default_frame_rate)
     return dataList
 
-def pltSingle(x, v, t, a=None, epochNum=None, Dimension=0, render=True, debug=False):
+
+def pltSingle(x_end, v_end, x, v, t, a=None, epochNum=None, Dimension=0, render=True, debug=False):
     if not debug:
         if epochNum is not None:
             x = x[0:epochNum]
@@ -63,6 +65,18 @@ def pltSingle(x, v, t, a=None, epochNum=None, Dimension=0, render=True, debug=Fa
         ax2 = ax1.twinx()
         ax2.plot(t, x, 'g', label="x")
         ax2.legend(loc=2)
+
+        ax4 = ax1.twiny()
+        v_endlist = []
+        for i in range(len(t)):
+            v_endlist.append(v_end)
+        ax4.plot(t, v_endlist, 'r')
+
+        ax5 = ax2.twiny()
+        x_endlist = []
+        for i in range(len(t)):
+            x_endlist.append(x_end)
+        ax4.plot(t, x_endlist, 'g')
 
         ax1.set_title("Dimension = " + str(Dimension))
         ax1.set_xlabel('Time/(epoch)')
@@ -89,6 +103,18 @@ def pltSingle(x, v, t, a=None, epochNum=None, Dimension=0, render=True, debug=Fa
         ax2.plot(t, x, 'g', label="x")
         ax2.legend(loc=2)
 
+        ax4 = ax1.twiny()
+        v_endlist = []
+        for i in range(len(t)):
+            v_endlist.append(v_end)
+        ax4.plot(t, v_endlist, 'r')
+
+        ax5 = ax2.twiny()
+        x_endlist = []
+        for i in range(len(t)):
+            x_endlist.append(x_end)
+        ax4.plot(t, x_endlist, 'g')
+
         ax1.set_title("Dimension = " + str(Dimension))
         ax2.set_ylabel('x/(m)')
         ax1.set_ylabel('v/(m/s)')
@@ -106,16 +132,20 @@ def pltSingle(x, v, t, a=None, epochNum=None, Dimension=0, render=True, debug=Fa
         return
 
 
-def showImg(x, vx, t, ax, y=None, vy=None, ay=None, epochNum=None, Dimension=0, render=True, debug=False):
+def showImg(x_end, v_end, x, vx, t, ax, y_end=None, vy_end=None, y=None, vy=None, ay=None, epochNum=None, Dimension=0, render=True, debug=False):
     if Dimension == 0:
-        pltSingle(x, vx, t, ax, epochNum, Dimension, render, debug)
+        pltSingle(x_end, v_end, x, vx, t, ax,
+                  epochNum, Dimension, render, debug)
 
     if Dimension == 1:
-        pltSingle(y, vy, t, ay, epochNum, Dimension, render, debug)
+        pltSingle(y_end, vy_end, y, vy, t, ay,
+                  epochNum, Dimension, render, debug)
 
     if Dimension == 2:
-        pltSingle(x, vx, t, ax, epochNum, Dimension, render, debug)
-        pltSingle(y, vy, t, ay, epochNum, Dimension, render, debug)
+        pltSingle(x_end, v_end, x, vx, t, ax,
+                  epochNum, Dimension, render, debug)
+        pltSingle(y_end, vy_end, y, vy, t, ay,
+                  epochNum, Dimension, render, debug)
 
 # t = [0, 1, 2, 3, 4, 5]
 # x = [1 + i for i in t]
