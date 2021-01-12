@@ -14,6 +14,19 @@
 
 - [ ] 把重要的图片放在ImportantImg中
 
+# 进度
+
+- [x] state1
+- [x] state2
+- [x] state3
+- [x] state4
+- [x] state5
+- [x] state6
+- [ ] state7
+- [ ] state8
+- [ ] state9
+- [ ] state10
+
 # 杂活
 
 hxy

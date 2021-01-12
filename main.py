@@ -10,6 +10,7 @@ if __name__ == '__main__':
     #1:全部手输
     # x_data_list = loadDataByHand(0)
     # y_data_list = loadDataByHand(0)
+
     x, y, vx, vy, ax, ay, t = compute_2d(x_data_list, [],epoch_num=2000)
     print("epoch:", len(x))
     print("v:", vx[len(vx)-1])
