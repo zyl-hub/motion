@@ -25,24 +25,15 @@ def compute_2d(x_data_list, y_data_list, y_v=None,epoch_num = 2000):
     v_y = []
     a_x = []
     a_y = []
-    time = []
     epoch = 0
     x_last_all_info_dict = {"a": 0,
                             "dec_time": 0,
                             "flat_time": 0,
                             "acc_time": 0}
-    x_now_all_info_dict = {"a": 0,
-                           "dec_time": 0,
-                           "flat_time": 0,
-                           "acc_time": 0}
     y_last_all_info_dict = {"a": 0,
                             "dec_time": 0,
                             "flat_time": 0,
                             "acc_time": 0}
-    y_now_all_info_dict = {"a": 0,
-                           "dec_time": 0,
-                           "flat_time": 0,
-                           "acc_time": 0}
     while(1):
         if(epoch == 0):
             print(epoch,":",end="")
