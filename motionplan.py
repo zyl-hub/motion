@@ -285,6 +285,8 @@ def compute_1d(x, v0, v1, a_max, d_max, v_max, frame_rate, all_info_dict):
                            v_max,
                            frame_rate,
                            all_info_dict)
+                all_info_dict["aord"] = 0
+                print("*"*10)
             print("state10:", "x:", x, "\t", "v0:", v0, "\t",
                   "v1:", v1, "\t", "a:", all_info_dict["a"])
             return
