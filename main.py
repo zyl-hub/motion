@@ -3,7 +3,7 @@ from compute import *
 
 
 if __name__ == '__main__':
-    x_data_list = loadData("state7", "1")
+    x_data_list = loadData("state8", "1")
     print(x_data_list)
     # y_data_list = loadData("state2", "1")
 
@@ -12,7 +12,7 @@ if __name__ == '__main__':
     # x_data_list = loadDataByHand(0)
     # y_data_list = loadDataByHand(0)
 
-    x, y, vx, vy, ax, ay, t = compute_2d(x_data_list, [], epoch_num=2000)
+    x, y, vx, vy, ax, ay, t = compute_2d(x_data_list, [], epoch_num=2500)
     print(x_data_list)
     print("epoch:", len(x))
     print("v:", vx[len(vx)-1])
