@@ -173,21 +173,21 @@ def compute_1d(x, v0, v1, a_max, d_max, v_max, frame_rate, all_info_dict):
             # state7
             if(abs(v_m) < v_max):
                 print("state7:")
-                # compute_1d(total_x_0_to_v1, copy_sign(vzero, v1), v1,
-                #            a_max, d_max, v_max, frame_rate, all_info_dict)
-                # compute_1d(total_x_v_m_to_0, v_m, copy_sign(vzero, -v0),
-                #            a_max, d_max, v_max, frame_rate, all_info_dict)
-                # compute_1d(total_x_0_to_v_m, copy_sign(vzero, -v0),
-                #            v_m, a_max, d_max, v_max, frame_rate, all_info_dict)
-                # compute_1d(total_x_v0_to_0, v0, copy_sign(vzero, v0),
-                #            a_max, d_max, v_max, frame_rate, all_info_dict)
-                if abs(v0) > 0.015:
-                    # time
-                    compute_1d(total_x_v0_to_0, v0, copy_sign(vzero, v0),
-                               a_max, d_max, v_max, frame_rate, all_info_dict)
-                else:
-                    compute_1d(copy_sign(abs(x)+total_x_v0_to_0, x), copy_sign(vzero, x), v1,
-                               a_max, d_max, v_max, frame_rate, all_info_dict)
+                compute_1d(total_x_0_to_v1, copy_sign(vzero, v1), v1,
+                           a_max, d_max, v_max, frame_rate, all_info_dict)
+                compute_1d(total_x_v_m_to_0, v_m, copy_sign(vzero, -v0),
+                           a_max, d_max, v_max, frame_rate, all_info_dict)
+                compute_1d(total_x_0_to_v_m, copy_sign(vzero, -v0),
+                           v_m, a_max, d_max, v_max, frame_rate, all_info_dict)
+                compute_1d(total_x_v0_to_0, v0, copy_sign(vzero, v0),
+                           a_max, d_max, v_max, frame_rate, all_info_dict)
+                # if abs(v0) > 0.015:
+                #     # time
+                #     compute_1d(total_x_v0_to_0, v0, copy_sign(vzero, v0),
+                #                a_max, d_max, v_max, frame_rate, all_info_dict)
+                # else:
+                #     compute_1d(copy_sign(abs(x)+total_x_v0_to_0, x), copy_sign(vzero, x), v1,
+                #                a_max, d_max, v_max, frame_rate, all_info_dict)
                 print("state7:", "x:", x, "\t", "v0:", v0, "\t",
                       "v1:", v1, "\t", "a:", all_info_dict["a"])
                 return
