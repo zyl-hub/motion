@@ -38,7 +38,7 @@
 
 - [x] state10
 
-- [ ] state9和state10需要多加亿点点情况
+- [x] state9和state10需要多加亿点点情况
 
 # 杂活
 

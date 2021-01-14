@@ -76,7 +76,7 @@ def pltSingle(x_end, v_end, x, v, t, a=None, epochNum=None, Dimension=0, render=
         x_endlist = []
         for i in range(len(t)):
             x_endlist.append(x_end)
-        ax4.plot(t, x_endlist, 'g')
+        ax5.plot(t, x_endlist, 'g')
 
         ax1.set_title("Dimension = " + str(Dimension))
         ax1.set_xlabel('Time/(epoch)')
@@ -107,13 +107,15 @@ def pltSingle(x_end, v_end, x, v, t, a=None, epochNum=None, Dimension=0, render=
         v_endlist = []
         for i in range(len(t)):
             v_endlist.append(v_end)
-        ax4.plot(t, v_endlist, 'r')
+        ax4.plot(t, v_endlist, 'b', label="v_target")
+        ax4.legend(loc=4)
 
         ax5 = ax2.twiny()
         x_endlist = []
         for i in range(len(t)):
             x_endlist.append(x_end)
-        ax4.plot(t, x_endlist, 'g')
+        ax5.plot(t, x_endlist, 'y', label="x_target")
+        ax5.legend(loc=3)
 
         ax1.set_title("Dimension = " + str(Dimension))
         ax2.set_ylabel('x/(m)')
