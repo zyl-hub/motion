@@ -53,6 +53,19 @@ void compute_motion_1d(double x, double v0, double v1, double a_max, double d_ma
         return;
     }
 
+    if (std::abs(v0) < a_max / frame_rate) {
+        v0 = copysign(a_max / frame_rate, v0);
+    }
+
+    if (std::abs(v1) < a_max / frame_rate) {
+        if (std::abs(x) < 0.0015) {
+            traj_accel = 0;
+            return;
+        } else {
+            v1 = copysign(vzero, v1);
+        }
+    }
+
     if (v0 * v1 > 0) {
         if (x * v0 > 0) {
             if (std::abs(v1) > std::abs(v0)) {
@@ -197,6 +210,9 @@ void compute_motion_1d(double x, double v0, double v1, double a_max, double d_ma
                 compute_motion_1d(total_x_v_m_to_0, v_m, copysign(vzero, -v0), a_max, d_max, v_max, a_factor, vel_factor, traj_accel, traj_time, traj_time_acc, traj_time_dec, traj_time_flat, frame_rate);
                 compute_motion_1d(total_x_0_to_v_m, copysign(vzero, -v0), v_m, a_max, d_max, v_max, a_factor, vel_factor, traj_accel, traj_time, traj_time_acc, traj_time_dec, traj_time_flat, frame_rate);
                 compute_motion_1d(total_x_v0_to_0, v0, copysign(vzero, v0), a_max, d_max, v_max, a_factor, vel_factor, traj_accel, traj_time, traj_time_acc, traj_time_dec, traj_time_flat, frame_rate);
+                if (traj_accel == 0) {
+                    traj_accel = copysign(a_max, -v0);
+                }
                 std::cout << "state7:"
                           << "x:" << x << "\t"
                           << "v0:" << v0 << "\t"
@@ -211,12 +227,15 @@ void compute_motion_1d(double x, double v0, double v1, double a_max, double d_ma
                 compute_motion_1d(total_x_v_max_to_0, v_max, copysign(vzero, -v0), a_max, d_max, v_max, a_factor, vel_factor, traj_accel, traj_time, traj_time_acc, traj_time_dec, traj_time_flat, frame_rate);
                 compute_motion_1d(x - total_x_v0_to_0 - total_x_v_max_to_0 - total_x_0_to_v1, copysign(vzero, -v0), v_m, a_max, d_max, v_max, a_factor, vel_factor, traj_accel, traj_time, traj_time_acc, traj_time_dec, traj_time_flat, frame_rate);
                 compute_motion_1d(total_x_v0_to_0, v0, copysign(vzero, v0), a_max, d_max, v_max, a_factor, vel_factor, traj_accel, traj_time, traj_time_acc, traj_time_dec, traj_time_flat, frame_rate);
+
                 std::cout << "state8:"
                           << "x:" << x << "\t"
                           << "v0:" << v0 << "\t"
                           << "v1:" << v1 << "\t"
                           << "a:" << traj_accel;
-
+                if (traj_accel == 0) {
+                    traj_accel = copysign(a_max, -v0);
+                }
                 return;
             }
         }
