@@ -10,17 +10,26 @@ savePath = "Img/" + \
     time.strftime('%Y-%m-%d-%H-%M-%S', time.localtime(time.time())) + "--"
 
 
+# params:
+# loadDataFromTxt : as you can see.
 def loadDataFromTxt(a_max=1, d_max=1, v_max=10, frame_rate=75, dataBase="test_data.txt"):
-    dataList = []
+    dataList_X = []
+    dataList_Y = []
     raw_data = [[], [], [], []]
     with open(dataBase, 'r', encoding='utf-8') as fp:
         for i, line in enumerate(fp):
             raw_data[i] = line.split('\t')
         fp.close()
-    for i in range(len(raw_data[0])-1):
-        dataList.append([eval(raw_data[j][i]) for j in range(4)])
-        dataList[-1] += [a_max, d_max, v_max, frame_rate]
-    return dataList
+    print(raw_data)
+    for i in range(len(raw_data[0])-2):
+        dataList_X.append([eval(raw_data[0][i]), eval(raw_data[0][i+1])])
+        dataList_X[-1] += [eval(raw_data[2][i]), eval(raw_data[2][i+1])]
+        dataList_X[-1] += [a_max, d_max, v_max, frame_rate]
+    for i in range(len(raw_data[1])-2):
+        dataList_Y.append([eval(raw_data[1][i]), eval(raw_data[1][i+1])])
+        dataList_Y[-1] += [eval(raw_data[3][i]), eval(raw_data[3][i+1])]
+        dataList_Y[-1] += [a_max, d_max, v_max, frame_rate]
+    return dataList_X, dataList_Y
 
 
 def loadData(dataType, dataOrder, dataBase="test_data.json"):
@@ -148,6 +157,21 @@ def pltSingle(x_end, v_end, x, v, t, a=None, epochNum=None, Dimension=0, render=
         return
 
 
+def pltPath(x, y, epochNum=None, render=True):
+    if epochNum is not None:
+        x = x[0:epochNum]
+        y = y[0:epochNum]
+
+    fig = plt.figure()
+
+    ax1 = fig.add_subplot(111)
+    ax1.plot(x, y, 'r')
+    ax1.set_title("X-Y/(m)")
+    if render:
+        plt.show()
+    return
+
+
 def showImg(x_end, v_end, x, vx, t, ax, y_end=None, vy_end=None, y=None, vy=None, ay=None, epochNum=None, Dimension=0, render=True, debug=False):
     if Dimension == 0:
         pltSingle(x_end, v_end, x, vx, t, ax,
@@ -162,4 +186,9 @@ def showImg(x_end, v_end, x, vx, t, ax, y_end=None, vy_end=None, y=None, vy=None
                   epochNum, Dimension, render, debug)
         pltSingle(y_end, vy_end, y, vy, t, ay,
                   epochNum, Dimension, render, debug)
+        pltPath(x, y, epochNum, render)
+
+
+# X, Y = loadDataFromTxt()
+# print(X)
 
