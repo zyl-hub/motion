@@ -48,14 +48,14 @@ def compute_1d(x, v0, v1, a_max, d_max, v_max, frame_rate, all_info_dict):
         return
 
     if abs(v0) < a_max/frame_rate:
-        v0 = copy_sign(a_max/frame_rate,v0)
+        v0 = copy_sign(a_max/frame_rate, v0)
 
     if abs(v1) < a_max/frame_rate:
         if abs(x) < 0.0015:
             all_info_dict["a"] = 0
             return
         else:
-            v1 = copy_sign(vzero,v1)
+            v1 = copy_sign(vzero, v1)
 
     if v0 * v1 > 0:
         if x * v0 > 0:
@@ -161,7 +161,8 @@ def compute_1d(x, v0, v1, a_max, d_max, v_max, frame_rate, all_info_dict):
                         all_info_dict["flat_time"] += flat_time
                         all_info_dict["dec_time"] += dec_time
                         all_info_dict["a"] = copy_sign(a_max, v0)
-                        if v_m - abs(v0) < a_max/frame_rate:
+                        # 这里的参数貌似十分有用，注意计算这个参数
+                        if v_m - abs(v0) < 15*a_max/frame_rate:
                             all_info_dict["a"] = 0
                         print("state6:", "x:", x, "\t", "v0:", v0, "\t", "v1:",
                               v1, "\t", "a:", all_info_dict["a"], "\t", "v_m:", v_m)
@@ -199,7 +200,7 @@ def compute_1d(x, v0, v1, a_max, d_max, v_max, frame_rate, all_info_dict):
                 #     compute_1d(copy_sign(abs(x)+total_x_v0_to_0, x), copy_sign(vzero, x), v1,
                 #                a_max, d_max, v_max, frame_rate, all_info_dict)
                 if all_info_dict["a"] == 0:
-                    all_info_dict["a"] = copy_sign(a_max,-v0)
+                    all_info_dict["a"] = copy_sign(a_max, -v0)
                 print("state7:", "x:", x, "\t", "v0:", v0, "\t",
                       "v1:", v1, "\t", "a:", all_info_dict["a"])
                 return
@@ -215,7 +216,7 @@ def compute_1d(x, v0, v1, a_max, d_max, v_max, frame_rate, all_info_dict):
                 compute_1d(total_x_v0_to_0, v0, copy_sign(vzero, v0),
                            a_max, d_max, v_max, frame_rate, all_info_dict)
                 if all_info_dict["a"] == 0:
-                    all_info_dict["a"] = copy_sign(a_max,-v0)
+                    all_info_dict["a"] = copy_sign(a_max, -v0)
                 print("state8:", "x:", x, "\t", "v0:", v0, "\t",
                       "v1:", v1, "\t", "a:", all_info_dict["a"])
 

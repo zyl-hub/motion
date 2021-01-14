@@ -12,29 +12,29 @@ if __name__ == '__main__':
     # 1:全部手输
     # x_data_list = loadDataByHand(0)
     # y_data_list = loadDataByHand(0)
-    all_x =[]
-    all_y =[]
+    all_x = []
+    all_y = []
     all_vx = []
     all_vy = []
     all_ax = []
     all_ay = []
     all_t = []
-    x_data_list = [
-        [0, 1, 0, 0, 1, 1, 10, 75],
-        [1, 1, 0, 0, 1, 1, 10, 75]
-    ]
     y_data_list = [
-        [0, 0, 0, 0, 1, 1, 10, 75],
-        [0, 1, 0, 0, 1, 1, 10, 75]
+        [0, 0, 0, 0, 5, 5, 10, 75],
+        [0, 1, 0, 0, 5, 5, 10, 75]
     ]
-    for i in range(len(x_data_list)):
-        x, y, vx, vy, ax, ay, t = compute_2d(x_data_list[i], y_data_list[i], epoch_num=20)
-        all_x += x
-        all_y += y
-        all_vx += vx
-        all_vy += vy
-        all_ax += ax
-        all_ay += ay
+    x_data_list = [
+        [0, 0, 0, 0, 5, 5, 10, 75],
+        [0, 1, 0, 0, 5, 5, 10, 75]
+    ]
+    x, y, vx, vy, ax, ay, t = compute_2d(
+        x_data_list, y_data_list, epoch_num=400)
+    all_x += x
+    all_y += y
+    all_vx += vx
+    all_vy += vy
+    all_ax += ax
+    all_ay += ay
     # print(x_data_list)
     # print("epoch:", len(x))
     # print("v:", vx[len(vx)-1])
