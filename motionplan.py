@@ -44,7 +44,7 @@ def compute_1d(x, v0, v1, a_max, d_max, v_max, frame_rate, all_info_dict):
         if total_x_v0_to_v1 < abs(x):
             all_info_dict["a"] = 0
         else:
-            all_info_dict["a"] = copy_sign(d_max,-v0)
+            all_info_dict["a"] = copy_sign(d_max, -v0)
         return
 
     if abs(v0) < a_max/frame_rate:
@@ -71,7 +71,7 @@ def compute_1d(x, v0, v1, a_max, d_max, v_max, frame_rate, all_info_dict):
                     all_info_dict["acc_time"] += acc_time
                     all_info_dict["flat_time"] += 0
                     all_info_dict["dec_time"] += 0
-                    all_info_dict["a"] = copy_sign(a_max,v0)
+                    all_info_dict["a"] = copy_sign(a_max, v0)
                     print("state1:", "x:", x, "\t", "v0:", v0, "\t",
                           "v1:", v1, "\t", "a:", all_info_dict["a"])
                     return
@@ -106,7 +106,7 @@ def compute_1d(x, v0, v1, a_max, d_max, v_max, frame_rate, all_info_dict):
                         all_info_dict["acc_time"] += acc_time
                         all_info_dict["flat_time"] += flat_time
                         all_info_dict["dec_time"] += dec_time
-                        all_info_dict["a"] = copy_sign(a_max,v0)
+                        all_info_dict["a"] = copy_sign(a_max, v0)
                         if v_m - v0 < a_max/frame_rate:  # 这个值与加速度和frame_rate有关，要算出来
                             all_info_dict["a"] = 0
                         print("state3:", "x:", x, "\t", "v0:", v0, "\t",
@@ -127,7 +127,7 @@ def compute_1d(x, v0, v1, a_max, d_max, v_max, frame_rate, all_info_dict):
                     all_info_dict["acc_time"] += 0
                     all_info_dict["flat_time"] += 0
                     all_info_dict["dec_time"] += dec_time
-                    all_info_dict["a"] = copy_sign(d_max,-v0)
+                    all_info_dict["a"] = copy_sign(d_max, -v0)
                     print("state4:", "x:", x, "\t", "v0:", v0, "\t",
                           "v1:", v1, "\t", "a:", all_info_dict["a"])
                     return
@@ -144,7 +144,7 @@ def compute_1d(x, v0, v1, a_max, d_max, v_max, frame_rate, all_info_dict):
                         all_info_dict["acc_time"] += acc_time
                         all_info_dict["flat_time"] += flat_time
                         all_info_dict["dec_time"] += dec_time
-                        all_info_dict["a"] = copy_sign(a_max,v0)
+                        all_info_dict["a"] = copy_sign(a_max, v0)
                         print("state5:", "x:", x, "\t", "v0:", v0, "\t",
                               "v1:", v1, "\t", "a:", all_info_dict["a"])
                         return
@@ -160,7 +160,7 @@ def compute_1d(x, v0, v1, a_max, d_max, v_max, frame_rate, all_info_dict):
                         all_info_dict["acc_time"] += acc_time
                         all_info_dict["flat_time"] += flat_time
                         all_info_dict["dec_time"] += dec_time
-                        all_info_dict["a"] = copy_sign(a_max,v0)
+                        all_info_dict["a"] = copy_sign(a_max, v0)
                         if v_m - abs(v0) < a_max/frame_rate:
                             all_info_dict["a"] = 0
                         print("state6:", "x:", x, "\t", "v0:", v0, "\t", "v1:",
