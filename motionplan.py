@@ -18,6 +18,7 @@ def copy_sign(a, b):
 def compute_1d(x, v0, v1, a_max, d_max, v_max, frame_rate, all_info_dict):
     delta_t = 1 / frame_rate
 
+
     if abs(x) < 1e-5 and abs(v0 - v1) < 1e-5:
         all_info_dict["a"] = 0
         all_info_dict["dec_time"] = 0
@@ -46,6 +47,16 @@ def compute_1d(x, v0, v1, a_max, d_max, v_max, frame_rate, all_info_dict):
         else:
             all_info_dict["a"] = copy_sign(d_max, -v0)
         return
+
+    if abs(v0) < a_max/frame_rate:
+        v0 = copy_sign(a_max/frame_rate,v0)
+
+    if abs(v1) < a_max/frame_rate:
+        if abs(x) < 0.0015:
+            all_info_dict["a"] = 0
+            return
+        else:
+            v1 = copy_sign(vzero,v1)
 
     if v0 * v1 > 0:
         if x * v0 > 0:
@@ -188,6 +199,8 @@ def compute_1d(x, v0, v1, a_max, d_max, v_max, frame_rate, all_info_dict):
                 # else:
                 #     compute_1d(copy_sign(abs(x)+total_x_v0_to_0, x), copy_sign(vzero, x), v1,
                 #                a_max, d_max, v_max, frame_rate, all_info_dict)
+                if all_info_dict["a"] == 0:
+                    all_info_dict["a"] = copy_sign(a_max,-v0)
                 print("state7:", "x:", x, "\t", "v0:", v0, "\t",
                       "v1:", v1, "\t", "a:", all_info_dict["a"])
                 return
@@ -202,6 +215,8 @@ def compute_1d(x, v0, v1, a_max, d_max, v_max, frame_rate, all_info_dict):
                     vzero, -v0), v_m, a_max, d_max, v_max, frame_rate, all_info_dict)
                 compute_1d(total_x_v0_to_0, v0, copy_sign(vzero, v0),
                            a_max, d_max, v_max, frame_rate, all_info_dict)
+                if all_info_dict["a"] == 0:
+                    all_info_dict["a"] = copy_sign(a_max,-v0)
                 print("state8:", "x:", x, "\t", "v0:", v0, "\t",
                       "v1:", v1, "\t", "a:", all_info_dict["a"])
 
