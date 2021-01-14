@@ -18,8 +18,7 @@ def copy_sign(a, b):
 def compute_1d(x, v0, v1, a_max, d_max, v_max, frame_rate, all_info_dict):
     delta_t = 1 / frame_rate
 
-
-    if abs(x) < 1e-5 and abs(v0 - v1) < 1e-5:
+    if abs(x) < 0.05 and abs(v0 - v1) < 0.05:
         all_info_dict["a"] = 0
         all_info_dict["dec_time"] = 0
         all_info_dict["flat_time"] = 0
