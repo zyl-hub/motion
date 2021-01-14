@@ -64,7 +64,7 @@ void compute_2d(double* x_data_list, double* y_data_list, int epoch_num)
                 x_data_list[0], x_data_list[2], 0, x_data_list[7]);
             x_data_list[0] = xinfo;
             x_data_list[2] = v_xinfo;
-            if (false) {
+            if (0) {
             } else {
                 std::cout << epoch << ":";
                 compute_motion_1d(y_data_list[1] - y_data_list[0],
@@ -120,7 +120,7 @@ void compute_2d(double* x_data_list, double* y_data_list, int epoch_num)
                 frame_rate);
             x_data_list[0] = xinfo;
             x_data_list[2] = v_xinfo;
-            if (false) {
+            if (0) {
             } else {
                 a_y[epoch] = y_last_all_info_dict[0];
                 y[epoch] = y_data_list[0];
