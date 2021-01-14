@@ -10,6 +10,19 @@ savePath = "Img/" + \
     time.strftime('%Y-%m-%d-%H-%M-%S', time.localtime(time.time())) + "--"
 
 
+def loadDataFromTxt(a_max=1, d_max=1, v_max=10, frame_rate=75, dataBase="test_data.txt"):
+    dataList = []
+    raw_data = [[], [], [], []]
+    with open(dataBase, 'r', encoding='utf-8') as fp:
+        for i, line in enumerate(fp):
+            raw_data[i] = line.split('\t')
+        fp.close()
+    for i in range(len(raw_data[0])-1):
+        dataList.append([eval(raw_data[j][i]) for j in range(4)])
+        dataList[-1] += [a_max, d_max, v_max, frame_rate]
+    return dataList
+
+
 def loadData(dataType, dataOrder, dataBase="test_data.json"):
     dataList = []
     with open(dataBase, 'r', encoding='utf') as fp:
@@ -23,6 +36,7 @@ def loadData(dataType, dataOrder, dataBase="test_data.json"):
         dataList.append(eval(FinalDataDict["d_max"]))
         dataList.append(eval(FinalDataDict["v_max"]))
         dataList.append(eval(FinalDataDict["frame_rate"]))
+        fp.close()
     return dataList
 
 
@@ -149,9 +163,3 @@ def showImg(x_end, v_end, x, vx, t, ax, y_end=None, vy_end=None, y=None, vy=None
         pltSingle(y_end, vy_end, y, vy, t, ay,
                   epochNum, Dimension, render, debug)
 
-# t = [0, 1, 2, 3, 4, 5]
-# x = [1 + i for i in t]
-# y = [2 + i for i in t]
-# vx = [3 + i for i in t]
-# vy = [4 + i for i in t]
-# showImg(x, t, vx, y, vy, "all", 2)
