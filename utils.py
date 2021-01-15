@@ -217,6 +217,30 @@ def showImg(x_end, v_end, x, vx, t, ax, y_end=None, vy_end=None, y=None, vy=None
         pltPath(x, y, epochNum, render)
 
 
+def showImgFromTxt(target_x="data/x.txt", target_v="data/v_x.txt", target_a="data/a_x.txt"):
+    with open(target_x, 'r', encoding='utf-8') as fp:
+        x = fp.read().split(' ')[0:-1]
+        for i in range(len(x)):
+            x[i] = eval(x[i])
+        fp.close()
+    with open(target_v, 'r', encoding='utf-8') as fp:
+        v = fp.read().split(' ')[0:-1]
+        for i in range(len(v)):
+            v[i] = eval(v[i])
+        fp.close()
+    with open(target_a, 'r', encoding='utf-8') as fp:
+        a = fp.read().split(' ')[0:-1]
+        for i in range(len(a)):
+            a[i] = eval(a[i])
+        fp.close()
+    print(len(x))
+    t = range(len(x))
+    print(len(x))
+    pltSingle(0, 0, x, v, t, a)
+
+
+X = showImgFromTxt()
+
 # X = [-1, 2, 3, 4, 2]
 # Y = [1, 6, 8, 2, 4]
 # pltDynamicPath(X, Y)
