@@ -72,6 +72,17 @@ def loadDataByHand(all_data):
     return dataList
 
 
+def loadDataByPath(x, y, v_x, v_y, a_max=1, d_max=1, v_max=10, frame_rate=75):
+    dataList_X = []
+    dataList_Y = []
+    for i in range(len(x)-1):
+        dataList_X.append([x[i], x[i+1], v_x[i], v_x[i+1]])
+        dataList_X[-1] += [a_max, d_max, v_max, frame_rate]
+        dataList_Y.append([y[i], y[i + 1], v_y[i], v_y[i + 1]])
+        dataList_Y[-1] += [a_max, d_max, v_max, frame_rate]
+    return dataList_X, dataList_Y
+
+
 def pltSingle(x_end, v_end, x, v, t, a=None, epochNum=None, Dimension=0, render=True, debug=False):
     if not debug:
         if epochNum is not None:
@@ -233,13 +244,18 @@ def showImgFromTxt(target_x="data/x.txt", target_v="data/v_x.txt", target_a="dat
         for i in range(len(a)):
             a[i] = eval(a[i])
         fp.close()
-    print(len(x))
     t = range(len(x))
-    print(len(x))
     pltSingle(0, 0, x, v, t, a)
 
 
-X = showImgFromTxt()
+# x = [1, 2, 3, 4, 5]
+# y = [2, 4, 6, 8, 10]
+# v_x = [1+i for i in x]
+# v_y = [10 + i for i in x]
+# X,Y = loadDataByPath(x, y, v_x, v_y)
+# print(X)
+# print(Y)
+# X = showImgFromTxt()
 
 # X = [-1, 2, 3, 4, 2]
 # Y = [1, 6, 8, 2, 4]
