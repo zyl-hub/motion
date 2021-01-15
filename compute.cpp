@@ -1,3 +1,4 @@
+#include "compute.h"
 #include "CMmotion.h"
 #include <fstream>
 #include <iostream>
