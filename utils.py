@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import matplotlib.animation as animation
 import json
 import time
 
@@ -20,7 +21,6 @@ def loadDataFromTxt(a_max=1, d_max=1, v_max=10, frame_rate=75, dataBase="test_da
         for i, line in enumerate(fp):
             raw_data[i] = line.split('\t')
         fp.close()
-    print(raw_data)
     for i in range(len(raw_data[0])-2):
         dataList_X.append([eval(raw_data[0][i]), eval(raw_data[0][i+1])])
         dataList_X[-1] += [eval(raw_data[2][i]), eval(raw_data[2][i+1])]
@@ -172,6 +172,34 @@ def pltPath(x, y, epochNum=None, render=True):
     return
 
 
+def pltDynamicPath(x, y, epochNum=None):
+    if epochNum is not None:
+        x = x[0:epochNum]
+        y = y[0:epochNum]
+
+    fig, ax = plt.subplots()
+    line = ax.plot(x, y)
+    dot, = ax.plot([], [], 'ro')
+
+    def init():
+        ax.set_xlim(min(x), max(x))
+        ax.set_ylim(min(y), max(y))
+        return line
+
+    def gen_dot():
+        for i in range(len(x)):
+            newdot = [x[i], y[i]]
+            yield newdot
+
+    def update_dot(newdot):
+        dot.set_data(newdot[0], newdot[1])
+        return dot,
+
+    ani = animation.FuncAnimation(fig, update_dot, frames=gen_dot, interval=100, init_func=init)
+    ani.save("Gif/dynamicImg.gif", writer='pillow', fps=1)
+    plt.show()
+
+
 def showImg(x_end, v_end, x, vx, t, ax, y_end=None, vy_end=None, y=None, vy=None, ay=None, epochNum=None, Dimension=0, render=True, debug=False):
     if Dimension == 0:
         pltSingle(x_end, v_end, x, vx, t, ax,
@@ -189,6 +217,6 @@ def showImg(x_end, v_end, x, vx, t, ax, y_end=None, vy_end=None, y=None, vy=None
         pltPath(x, y, epochNum, render)
 
 
-# X, Y = loadDataFromTxt()
-# print(X)
-
+# X = [-1, 2, 3, 4, 2]
+# Y = [1, 6, 8, 2, 4]
+# pltDynamicPath(X, Y)
