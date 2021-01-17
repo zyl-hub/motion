@@ -35,6 +35,7 @@ void compute_motion_1d(double x, double v0, double v1, double a_max, double d_ma
         traj_time_dec = 0;
         traj_time_flat = 0;
         traj_time_acc = 0;
+        std::cout << "0" << "\t";
         return;
     }
 
