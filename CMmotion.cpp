@@ -1,7 +1,6 @@
 #include <algorithm>
 #include <iostream>
 #include <math.h>
-#include "CMmotion.h"
 
 double vzero = 0.001;
 inline double copysign(double a, double b)
