@@ -2,6 +2,7 @@
 #include <fstream>
 #include <iostream>
 #include <math.h>
+#include <vector>
 
 double vzero = 0.001;
 inline double copysign(double a, double b)
