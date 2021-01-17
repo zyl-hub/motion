@@ -2,6 +2,7 @@
 #include <fstream>
 #include <iostream>
 #include <math.h>
+#include <typeinfo>
 #include <vector>
 
 double vzero = 0.001;
@@ -318,12 +319,12 @@ double computev(double x0, double v0, double a, double frame_rate)
 
 void compute_2d(int len, std::vector<std::vector<double>> x_data_list, std::vector<std::vector<double>> y_data_list, int epoch_num)
 {
-    std::vector<std::vector<double>> x(len, std::vector<double>(epoch_num));
-    std::vector<std::vector<double>> y(len, std::vector<double>(epoch_num));
-    std::vector<std::vector<double>> v_x(len, std::vector<double>(epoch_num));
-    std::vector<std::vector<double>> v_y(len, std::vector<double>(epoch_num));
-    std::vector<std::vector<double>> a_x(len, std::vector<double>(epoch_num));
-    std::vector<std::vector<double>> a_y(len, std::vector<double>(epoch_num));
+    std::vector<std::vector<double>> x(len, std::vector<double>(epoch_num, 0));
+    std::vector<std::vector<double>> y(len, std::vector<double>(epoch_num, 0));
+    std::vector<std::vector<double>> v_x(len, std::vector<double>(epoch_num, 0));
+    std::vector<std::vector<double>> v_y(len, std::vector<double>(epoch_num, 0));
+    std::vector<std::vector<double>> a_x(len, std::vector<double>(epoch_num, 0));
+    std::vector<std::vector<double>> a_y(len, std::vector<double>(epoch_num, 0));
     double x_traj_accel = 0;
     double x_traj_time = 0;
     double x_traj_time_acc = 0;
@@ -337,8 +338,9 @@ void compute_2d(int len, std::vector<std::vector<double>> x_data_list, std::vect
     double frame_rate = 75;
     int epoch = 0;
     double none = 0;
+    int epoch_break = 0;
     for (int i = 0; i < len; i++) {
-        while (1) {
+        for (int epoch = 0; epoch < epoch_num; epoch++) {
             if (epoch == 0) {
                 std::cout << epoch << ":"
                           << "\n";
@@ -454,11 +456,6 @@ void compute_2d(int len, std::vector<std::vector<double>> x_data_list, std::vect
                         frame_rate);
                 }
             }
-            if (epoch > epoch_num) {
-                break;
-            }
-
-            epoch += 1;
         }
     }
     std::ofstream xfile;
