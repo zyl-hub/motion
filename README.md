@@ -42,7 +42,7 @@
 
 - [x] state9和state10需要多加亿点点情况
 
-- [x] 移植到C++ok，CMmotion是最终要上的代码，final和final_2d是测试程序
+- [x] 移植到C++ok，CMmotion是最终要上的代码，final和final_2d是测试程序，C++ bug已修改
 
 # 杂活
 
