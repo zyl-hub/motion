@@ -35,7 +35,8 @@ void compute_motion_1d(double x, double v0, double v1, double a_max, double d_ma
         traj_time_dec = 0;
         traj_time_flat = 0;
         traj_time_acc = 0;
-        std::cout << "0" << "\t";
+        std::cout << "0"
+                  << "\t";
         return;
     }
 
@@ -397,7 +398,7 @@ void compute_2d(int len, std::vector<std::vector<double>> x_data_list, std::vect
                         y_data_list[i][0], y_data_list[i][2], 0, y_data_list[i][7]);
                     v_yinfo = computev(
                         y_data_list[i][0], y_data_list[i][2], 0, y_data_list[i][7]);
-                    y_data_list[i][0] = xinfo;
+                    y_data_list[i][0] = yinfo;
                     y_data_list[i][2] = v_yinfo;
                 }
             } else {
@@ -455,6 +456,8 @@ void compute_2d(int len, std::vector<std::vector<double>> x_data_list, std::vect
                         y_traj_time_dec,
                         y_traj_time_flat,
                         frame_rate);
+                    y_data_list[i][0] = yinfo;
+                    y_data_list[i][2] = v_yinfo;
                 }
             }
         }
@@ -522,12 +525,12 @@ int main()
     std::vector<std::vector<double>> x_data_list(len, std::vector<double>(8));
     std::vector<std::vector<double>> y_data_list(len, std::vector<double>(8));
     x_data_list = {
-        { 0, 0, 0, 0, 5, 5, 10, 75 },
-        { 0, 1, 0, 0, 5, 5, 10, 75 }
+        { 0, 1, 0, 0, 5, 5, 10, 75 },
+        { 1, 0, 0, 0, 5, 5, 10, 75 }
     };
     y_data_list = {
-        { 0, 0, 0, 0, 5, 5, 10, 75 },
-        { 0, 1, 0, 0, 5, 5, 10, 75 }
+        { 0, 1, 0, 0, 5, 5, 10, 75 },
+        { 1, 0, 0, 0, 5, 5, 10, 75 }
     };
 
     compute_2d(len, x_data_list, y_data_list, epoch_num);

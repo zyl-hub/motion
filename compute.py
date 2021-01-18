@@ -91,7 +91,7 @@ def compute_2d(x_data_list, y_data_list, epoch_num=2000):
                     info = compute(
                         y_data_list[i][0], y_data_list[i][2], y_last_all_info_dict["a"], y_data_list[i][7])
                     print(epoch, ":", end="")
-                    compute_1d(y_data_list[i][1] - x_data_list[i][0],
+                    compute_1d(y_data_list[i][1] - y_data_list[i][0],
                                y_data_list[i][2],
                                y_data_list[i][3],
                                y_data_list[i][4],
