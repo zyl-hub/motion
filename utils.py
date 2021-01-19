@@ -206,7 +206,8 @@ def pltDynamicPath(x, y, epochNum=None):
         dot.set_data(newdot[0], newdot[1])
         return dot,
 
-    ani = animation.FuncAnimation(fig, update_dot, frames=gen_dot, interval=100, init_func=init)
+    ani = animation.FuncAnimation(
+        fig, update_dot, frames=gen_dot, interval=100, init_func=init)
     ani.save("Gif/dynamicImg.gif", writer='pillow', fps=1)
     plt.show()
 
@@ -217,7 +218,7 @@ def showImg(x_end, v_end, x, vx, t, ax, y_end=None, vy_end=None, y=None, vy=None
     if(abs(x_len - y_len)) > 0.01 * x_len:
         return
 
-    min_len=min(x_len,y_len)
+    min_len = min(x_len, y_len)
     x = x[0:min_len]
     y = y[0:min_len]
     vx = vx[0:min_len]
@@ -262,6 +263,7 @@ def showImgFromTxt(target_x="data/x.txt", target_v="data/v_x.txt", target_a="dat
     pltSingle(0, 0, x, v, t, a)
 
 
+showImgFromTxt()
 # x = [1, 2, 3, 4, 5]
 # y = [2, 4, 6, 8, 10]
 # v_x = [1+i for i in x]
