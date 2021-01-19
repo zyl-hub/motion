@@ -1,34 +1,43 @@
 from utils import *
-from compute import *
+# from compute import *
+from compute2d import compute_2d
 
 
 if __name__ == '__main__':
-    # x_data_list,y_data_list = loadDataFromTxt(a_max=1,d_max=1,v_max=10,frame_rate=75)
-    # print(x_data_list)
-    # print(y_data_list)
+    x_data_list,y_data_list = loadDataFromTxt(a_max=2,d_max=2,v_max=2,frame_rate=75)
+    x_data_list = x_data_list[30:60]
+    y_data_list = y_data_list[30:60]
+    # x_data_list = []
+    #
+    # for i in range(len(y_data_list)):
+    #     x_data_list.append(y_data_list[i][:])
+    print(x_data_list)
+    print(y_data_list)
+    # x_data_list = [loadData("any_state","2"),loadData("any_state","3")]
+    # y_data_list = [loadData("any_state","2"),loadData("any_state","3")]
     # y_data_list = loadData("state2", "1")
 
     # 0:部分手输
     # 1:全部手输
-    # x_data_list = loadDataByHand(0)
-    # y_data_list = loadDataByHand(0)
+    # x_data_list = loadDataByHand(1)
+    # y_data_list = loadDataByHand(1)
     all_x = []
     all_y = []
     all_vx = []
     all_vy = []
     all_ax = []
     all_ay = []
-    all_t = []
-    y_data_list = [
-        [0, 0, 0, 0, 5, 5, 10, 75],
-        [0, 1, 0, 0, 5, 5, 10, 75]
-    ]
-    x_data_list = [
-        [0, 0, 0, 0, 5, 5, 10, 75],
-        [0, 1, 0, 0, 5, 5, 10, 75]
-    ]
+    # y_data_list = [
+    #     # [0, 0, 0, 0, 5, 5, 10, 75],
+    #     # [0, 1, 0, 0, 5, 5, 10, 75]
+    #     []
+    # ]
+    # x_data_list = [
+    #     # [0, 0, 0, 0, 5, 5, 10, 75],
+    #     [0, 1, 0, 0, 5, 5, 10, 75]
+    # ]
     x, y, vx, vy, ax, ay, t = compute_2d(
-        x_data_list, y_data_list, epoch_num=400)
+        x_data_list, y_data_list, epoch_num=700)
     all_x += x
     all_y += y
     all_vx += vx

@@ -100,17 +100,17 @@ def pltSingle(x_end, v_end, x, v, t, a=None, epochNum=None, Dimension=0, render=
         ax2.plot(t, x, 'g', label="x")
         ax2.legend(loc=2)
 
-        ax4 = ax1.twiny()
-        v_endlist = []
-        for i in range(len(t)):
-            v_endlist.append(v_end)
-        ax4.plot(t, v_endlist, 'r')
-
-        ax5 = ax2.twiny()
-        x_endlist = []
-        for i in range(len(t)):
-            x_endlist.append(x_end)
-        ax5.plot(t, x_endlist, 'g')
+        # ax4 = ax1.twiny()
+        # v_endlist = []
+        # for i in range(len(t)):
+        #     v_endlist.append(v_end)
+        # ax4.plot(t, v_endlist, 'r')
+        #
+        # ax5 = ax2.twiny()
+        # x_endlist = []
+        # for i in range(len(t)):
+        #     x_endlist.append(x_end)
+        # ax5.plot(t, x_endlist, 'g')
 
         ax1.set_title("Dimension = " + str(Dimension))
         ax1.set_xlabel('Time/(epoch)')
@@ -137,19 +137,19 @@ def pltSingle(x_end, v_end, x, v, t, a=None, epochNum=None, Dimension=0, render=
         ax2.plot(t, x, 'g', label="x")
         ax2.legend(loc=2)
 
-        ax4 = ax1.twiny()
-        v_endlist = []
-        for i in range(len(t)):
-            v_endlist.append(v_end)
-        ax4.plot(t, v_endlist, 'b', label="v_target")
-        ax4.legend(loc=4)
+        # ax4 = ax1.twiny()
+        # v_endlist = []
+        # for i in range(len(t)):
+        #     v_endlist.append(v_end)
+        # ax4.plot(t, v_endlist, 'b', label="v_target")
+        # ax4.legend(loc=4)
 
-        ax5 = ax2.twiny()
-        x_endlist = []
-        for i in range(len(t)):
-            x_endlist.append(x_end)
-        ax5.plot(t, x_endlist, 'y', label="x_target")
-        ax5.legend(loc=3)
+        # ax5 = ax2.twiny()
+        # x_endlist = []
+        # for i in range(len(t)):
+        #     x_endlist.append(x_end)
+        # ax5.plot(t, x_endlist, 'y', label="x_target")
+        # ax5.legend(loc=3)
 
         ax1.set_title("Dimension = " + str(Dimension))
         ax2.set_ylabel('x/(m)')
@@ -212,6 +212,20 @@ def pltDynamicPath(x, y, epochNum=None):
 
 
 def showImg(x_end, v_end, x, vx, t, ax, y_end=None, vy_end=None, y=None, vy=None, ay=None, epochNum=None, Dimension=0, render=True, debug=False):
+    x_len = len(x)
+    y_len = len(y)
+    if(abs(x_len - y_len)) > 0.01 * x_len:
+        return
+
+    min_len=min(x_len,y_len)
+    x = x[0:min_len]
+    y = y[0:min_len]
+    vx = vx[0:min_len]
+    vy = vy[0:min_len]
+    ax = ax[0:min_len]
+    ay = ay[0:min_len]
+    t = range(min_len)
+
     if Dimension == 0:
         pltSingle(x_end, v_end, x, vx, t, ax,
                   epochNum, Dimension, render, debug)

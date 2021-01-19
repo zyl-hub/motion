@@ -50,6 +50,7 @@ def compute_2d(x_data_list, y_data_list, epoch_num=2000):
                     pass
                 else:
                     print(epoch, ":", end="")
+                    print("*"*8,y_data_list[i])
                     compute_1d(y_data_list[i][1] - y_data_list[i][0],
                                y_data_list[i][2],
                                y_data_list[i][3],
@@ -101,12 +102,20 @@ def compute_2d(x_data_list, y_data_list, epoch_num=2000):
                                y_last_all_info_dict)
                     y_data_list[i][0] = info[0]
                     y_data_list[i][2] = info[1]
-            if abs(x_data_list[i][0] - x_data_list[i][1]) < 3 * x_data_list[i][2] / x_data_list[i][7]:
-                if(len(y_data_list[i]) == 0):
-                    break
-                else:
-                    if abs(y_data_list[i][0] - y_data_list[i][1]) < 3 * y_data_list[i][2] / y_data_list[i][7]:
-                        break
+                print("delta_x:", abs(x_data_list[i][0] - x_data_list[i][1]))
+                print(abs(x_data_list[i][2] / x_data_list[i][7]))
+                # print("delta_y:", abs(y_data_list[i][0] - y_data_list[i][1]))
+                # print(y_data_list[i][0])
+                # print(y_data_list[i][1])
+                # print(abs(y_data_list[i][2] / y_data_list[i][7]))
+            # if abs(x_data_list[i][0] - x_data_list[i][1]) < 0.004: # 3 * abs(x_data_list[i][2] / x_data_list[i][7]):
+            #     if(len(y_data_list[i]) == 0):
+            #         print("enough")
+            #         break
+            #     else:
+            if abs(y_data_list[i][0] - y_data_list[i][1]) < 0.004: # 3 * abs(y_data_list[i][2] / y_data_list[i][7]):
+                print("enough")
+                break
 
             if epoch_break > epoch_num/len(x_data_list):
                 epoch_break = 0

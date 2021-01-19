@@ -18,7 +18,7 @@ def copy_sign(a, b):
 def compute_1d(x, v0, v1, a_max, d_max, v_max, frame_rate, all_info_dict):
     delta_t = 1 / frame_rate
 
-    if abs(x) < 0.05 and abs(v0 - v1) < 0.05:
+    if abs(x) < 0.005 and abs(v0 - v1) < 0.005:
         all_info_dict["a"] = 0
         all_info_dict["dec_time"] = 0
         all_info_dict["flat_time"] = 0
@@ -50,12 +50,12 @@ def compute_1d(x, v0, v1, a_max, d_max, v_max, frame_rate, all_info_dict):
     if abs(v0) < a_max/frame_rate:
         v0 = copy_sign(a_max/frame_rate, v0)
 
-    if abs(v1) < a_max/frame_rate:
-        if abs(x) < 0.0015:
-            all_info_dict["a"] = 0
-            return
-        else:
-            v1 = copy_sign(vzero, v1)
+    # if abs(v1) < a_max/frame_rate:
+    #     if abs(x) < 0.0015:
+    #         all_info_dict["a"] = 0
+    #         return
+    #     else:
+    #         v1 = copy_sign(vzero, v1)
 
     if v0 * v1 > 0:
         if x * v0 > 0:
@@ -162,8 +162,10 @@ def compute_1d(x, v0, v1, a_max, d_max, v_max, frame_rate, all_info_dict):
                         all_info_dict["dec_time"] += dec_time
                         all_info_dict["a"] = copy_sign(a_max, v0)
                         # 这里的参数貌似十分有用，注意计算这个参数
-                        if v_m - abs(v0) < 15*a_max/frame_rate:
+                        if v_m - abs(v0) < 5*a_max/frame_rate:
                             all_info_dict["a"] = 0
+                        if v_m - abs(v0) < a_max/frame_rate:
+                            all_info_dict["a"] = copy_sign(d_max,-v0)
                         print("state6:", "x:", x, "\t", "v0:", v0, "\t", "v1:",
                               v1, "\t", "a:", all_info_dict["a"], "\t", "v_m:", v_m)
                         return
@@ -271,7 +273,7 @@ def compute_1d(x, v0, v1, a_max, d_max, v_max, frame_rate, all_info_dict):
                            v_max,
                            frame_rate,
                            all_info_dict)
-
+                print("#"*20)
                 # compute_1d(copy_sign(total_x_v0_to_0, -x), v0, copy_sign(vzero, x),
                 # a_max, d_max, v_max, frame_rate, all_info_dict)
                 compute_1d(copy_sign(total_x_v0_to_0, -x), v0, copy_sign(vzero, -x),
@@ -281,6 +283,7 @@ def compute_1d(x, v0, v1, a_max, d_max, v_max, frame_rate, all_info_dict):
                 # a_max, d_max, v_max, frame_rate, all_info_dict)
                 compute_1d(copy_sign(total_x_v0_to_0, -x), v0, copy_sign(vzero, -x),
                            a_max, d_max, v_max, frame_rate, all_info_dict)
+                print("$"*20)
                 compute_1d(copy_sign(total_x_v0_to_0 + abs(x), x),
                            copy_sign(vzero, x),
                            v1,
