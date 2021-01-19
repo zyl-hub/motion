@@ -1,9 +1,7 @@
 Img/
 .idea/
-log
 __pycache__/
 final
-main
-compute
+log
 CMmotion
 final_2d
