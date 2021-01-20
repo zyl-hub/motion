@@ -520,7 +520,7 @@ void compute_2d(int len, std::vector<std::vector<double>> x_data_list, std::vect
 
 int main()
 {
-    int epoch_num = 20;
+    int epoch_num = 10;
     int len = 30;
     std::vector<std::vector<double>> x_data_list(len, std::vector<double>(8));
     std::vector<std::vector<double>> y_data_list(len, std::vector<double>(8));

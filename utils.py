@@ -243,27 +243,45 @@ def showImg(x_end, v_end, x, vx, t, ax, y_end=None, vy_end=None, y=None, vy=None
         pltPath(x, y, epochNum, render)
 
 
-def showImgFromTxt(target_x="data/x.txt", target_v="data/v_x.txt", target_a="data/a_x.txt"):
+def showImgFromTxt(target_x="data/x.txt", target_vx="data/v_x.txt", target_ax="data/a_x.txt", target_y="data/y.txt", target_vy="data/v_y.txt", target_ay="data/a_y.txt"):
     with open(target_x, 'r', encoding='utf-8') as fp:
         x = fp.read().split(' ')[0:-1]
         for i in range(len(x)):
             x[i] = eval(x[i])
         fp.close()
-    with open(target_v, 'r', encoding='utf-8') as fp:
-        v = fp.read().split(' ')[0:-1]
-        for i in range(len(v)):
-            v[i] = eval(v[i])
+    with open(target_vx, 'r', encoding='utf-8') as fp:
+        vx = fp.read().split(' ')[0:-1]
+        for i in range(len(vx)):
+            vx[i] = eval(vx[i])
         fp.close()
-    with open(target_a, 'r', encoding='utf-8') as fp:
-        a = fp.read().split(' ')[0:-1]
-        for i in range(len(a)):
-            a[i] = eval(a[i])
+    with open(target_ax, 'r', encoding='utf-8') as fp:
+        ax = fp.read().split(' ')[0:-1]
+        for i in range(len(ax)):
+            ax[i] = eval(ax[i])
+        fp.close()
+    with open(target_y, 'r', encoding='utf-8') as fp:
+        y = fp.read().split(' ')[0:-1]
+        for i in range(len(y)):
+            y[i] = eval(y[i])
+        fp.close()
+    with open(target_vy, 'r', encoding='utf-8') as fp:
+        vy = fp.read().split(' ')[0:-1]
+        for i in range(len(vy)):
+            vy[i] = eval(vy[i])
+        fp.close()
+    with open(target_ay, 'r', encoding='utf-8') as fp:
+        ay = fp.read().split(' ')[0:-1]
+        for i in range(len(ay)):
+            ay[i] = eval(ay[i])
         fp.close()
     t = range(len(x))
-    pltSingle(0, 0, x, v, t, a)
+    pltSingle(0, 0, x, vx, t, ax)
+    pltSingle(0, 0, y, vy, t, ay)
+    epochNum = len
+    pltPath(x, y)
 
 
-showImgFromTxt()
+# showImgFromTxt()
 # x = [1, 2, 3, 4, 5]
 # y = [2, 4, 6, 8, 10]
 # v_x = [1+i for i in x]
