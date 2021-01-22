@@ -4,17 +4,17 @@ from compute2d import compute_2d
 
 
 if __name__ == '__main__':
-    x_data_list,y_data_list = loadDataFromTxt(a_max=2,d_max=2,v_max=2,frame_rate=75)
-    x_data_list = x_data_list[30:60]
-    y_data_list = y_data_list[30:60]
+    # x_data_list,y_data_list = loadDataFromTxt(a_max=2,d_max=2,v_max=2,frame_rate=75)
+    # x_data_list = x_data_list[30:60]
+    # y_data_list = y_data_list[30:60]
     # x_data_list = []
     #
     # for i in range(len(y_data_list)):
     #     x_data_list.append(y_data_list[i][:])
-    print(x_data_list)
-    print(y_data_list)
-    # x_data_list = [loadData("any_state","2"),loadData("any_state","3")]
-    # y_data_list = [loadData("any_state","2"),loadData("any_state","3")]
+    # print(x_data_list)
+    # print(y_data_list)
+    x_data_list = [loadData("state0","2")]
+    y_data_list = [loadData("state0","2")]
     # y_data_list = loadData("state2", "1")
 
     # 0:部分手输

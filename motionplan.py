@@ -50,12 +50,95 @@ def compute_1d(x, v0, v1, a_max, d_max, v_max, frame_rate, all_info_dict):
     if abs(v0) < a_max/frame_rate:
         v0 = copy_sign(a_max/frame_rate, v0)
 
-    # if abs(v1) < a_max/frame_rate:
-    #     if abs(x) < 0.0015:
-    #         all_info_dict["a"] = 0
-    #         return
-    #     else:
-    #         v1 = copy_sign(vzero, v1)
+    if abs(v1) < a_max/frame_rate:
+        if abs(x) < 0.0015:
+            all_info_dict["a"] = 0
+            return
+        else:
+            v1 = copy_sign(vzero, v1)
+
+    if abs(v0) < a_max/frame_rate and abs(v1) < a_max/frame_rate:
+        if abs(x) < 0.01:
+            v0 = v0 + all_info_dict["a"]/frame_rate
+            all_info_dict["a"] = -v0/frame_rate
+            return
+        else:
+            all_info_dict["a"] = copy_sign(a_max, x)
+            return
+    elif abs(v0) < 1e-5 and abs(v1) >= 1e-5:
+        all_info_dict["a"] = copy_sign(a_max, x)
+        return
+    # elif abs(v1) < 1e-5 and abs(v0) >= 1e-5:
+    #     v_m = math.sqrt(
+    #         (2 * a_max * d_max * abs(x) + d_max * v0 * v0 +
+    #          a_max * v1 * v1) / (a_max + d_max))
+    #     if(v_m > v_max):
+    #
+    #     elif(v_m < v_max):
+
+    elif abs(v1) < 1e-5 and abs(v0) >= 1e-5:
+        if abs(v0) < a_max / frame_rate and abs(v1) < a_max / frame_rate:
+            if abs(x) < 0.01:
+                v0 = v0 + all_info_dict["a"] / frame_rate
+                all_info_dict["a"] = -v0 / frame_rate
+                return
+        total_t_v0_to_v1 = abs(v0 - v1) / d_max
+        total_x_v0_to_v1 = abs(v0 + v1) / 2 * total_t_v0_to_v1
+        # <++>
+        # 小量需要计算
+        # state4
+        if abs(x) - total_x_v0_to_v1 < 0.01:  # 参数
+            print("state4:")
+            dec_time = (abs(v0) -
+                        math.sqrt(abs(v0**2 - 2 * d_max * abs(x)))) / d_max
+            all_info_dict["acc_time"] += 0
+            all_info_dict["flat_time"] += 0
+            all_info_dict["dec_time"] += dec_time
+            all_info_dict["a"] = copy_sign(d_max, -v0)
+            print("state4:", "x:", x, "\t", "v0:", v0, "\t",
+                  "v1:", v1, "\t", "a:", all_info_dict["a"])
+            return
+        elif abs(abs(x) - total_x_v0_to_v1) >= 0.01:  # 参数
+            total_x_v0_to_v_max = abs(v_max**2 - v0**2) / (2 * a_max)
+            total_x_v_max_to_v1 = abs(v_max**2 - v1**2) / (2 * d_max)
+            total_x = total_x_v0_to_v_max + total_x_v_max_to_v1
+            # state5
+            if(abs(x) > total_x):
+                print("state5:")
+                acc_time = (abs(v_max)-abs(v0))/a_max
+                flat_time = (abs(x)-total_x)/v_max
+                dec_time = (v_max-abs(v1))/d_max
+                all_info_dict["acc_time"] += acc_time
+                all_info_dict["flat_time"] += flat_time
+                all_info_dict["dec_time"] += dec_time
+                all_info_dict["a"] = copy_sign(a_max, v0)
+                print("state5:", "x:", x, "\t", "v0:", v0, "\t",
+                      "v1:", v1, "\t", "a:", all_info_dict["a"])
+                return
+            # state6
+            else:
+                print("state6:")
+                v_m = math.sqrt(
+                    (2 * a_max * d_max * abs(x) + d_max * v0 * v0 +
+                     a_max * v1 * v1) / (a_max + d_max))
+                acc_time = (v_m - abs(v0)) / a_max
+                flat_time = 0
+                dec_time = (v_m - abs(v1)) / d_max
+                all_info_dict["acc_time"] += acc_time
+                all_info_dict["flat_time"] += flat_time
+                all_info_dict["dec_time"] += dec_time
+                all_info_dict["a"] = copy_sign(a_max, v0)
+                # 这里的参数貌似十分有用，注意计算这个参数
+                if v_m - abs(v0) < 5*a_max/frame_rate:
+                    all_info_dict["a"] = 0
+                if v_m - abs(v0) < a_max/frame_rate:
+                    all_info_dict["a"] = copy_sign(d_max,-v0)
+                print("state6:", "x:", x, "\t", "v0:", v0, "\t", "v1:",
+                      v1, "\t", "a:", all_info_dict["a"], "\t", "v_m:", v_m)
+                return
+
+
+
 
     if v0 * v1 > 0:
         if x * v0 > 0:
