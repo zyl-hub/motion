@@ -8,12 +8,12 @@ def copy_sign(a, b):
     else:
         return -abs(a)
 
+
 def compute_1d(x, v0, v1, a_max, d_max, v_max, frame_rate, all_info_dict):
     delta_t = 1 / frame_rate
 
     if math.isinf(x) or math.isinf(v0) or math.isinf(v1):
         return
-
 
     if abs(abs(v0) - v_max) < 5*a_max/frame_rate:
         if v1 * v0 > 0:
@@ -33,14 +33,14 @@ def compute_1d(x, v0, v1, a_max, d_max, v_max, frame_rate, all_info_dict):
         if abs(x) < 0.01:
             # v0 = v0 + all_info_dict["a"] / frame_rate
             all_info_dict["a"] = -v0 / frame_rate / 2
-            print("00:",all_info_dict["a"])
+            print("00:", all_info_dict["a"])
             return
         else:
             all_info_dict["a"] = copy_sign(a_max, x)
-            print("00:",all_info_dict["a"])
+            print("00:", all_info_dict["a"])
             return
 
-    elif abs(v0) < a_max /frame_rate:
+    elif abs(v0) < a_max / frame_rate:
         all_info_dict["a"] = copy_sign(a_max, x)
         return
 
@@ -51,7 +51,7 @@ def compute_1d(x, v0, v1, a_max, d_max, v_max, frame_rate, all_info_dict):
         elif v0 * x >= 0:
             total_x_v0_to_0 = v0*v0/(2*d_max)
             if abs(x) < total_x_v0_to_0:
-                all_info_dict["a"] = copy_sign(d_max,-v0)
+                all_info_dict["a"] = copy_sign(d_max, -v0)
                 return
             else:
                 all_info_dict["a"] = copy_sign(a_max, v0)
@@ -84,21 +84,4 @@ def compute_1d(x, v0, v1, a_max, d_max, v_max, frame_rate, all_info_dict):
                        v_max, frame_rate, all_info_dict)
             return
         else:
-            all_info_dict["a"] = copy_sign(d_max,-v0)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            all_info_dict["a"] = copy_sign(d_max, -v0)
