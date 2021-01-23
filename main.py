@@ -4,7 +4,14 @@ from compute import compute_2d
 
 
 if __name__ == '__main__':
-    x_data_list,y_data_list = loadDataFromTxt(a_max=5,d_max=5,v_max=3,frame_rate=75)
+    # x_data_list, y_data_list = loadDataFromTxt(a_max=5, d_max=5, v_max=3, frame_rate=75, dataBase="test_data4.txt") # 500
+    x_data_list, y_data_list = loadDataFromTxt(a_max=5, d_max=5, v_max=3, frame_rate=75, dataBase="test_data5.txt") # 50
+    # x_data_list, y_data_list = loadDataFromTxt(a_max=5, d_max=5, v_max=3, frame_rate=75, dataBase="test_data6.txt") #30
+    # x_data_list, y_data_list = loadDataFromTxt(a_max=5, d_max=5, v_max=3, frame_rate=75, dataBase="test_data7.txt") #80
+    # x_data_list,y_data_list = loadDataFromTxt(a_max=5,d_max=5,v_max=3,frame_rate=75, dataBase= "test_data8.txt") #90
+    # x_data_list, y_data_list = loadDataFromTxt(a_max=5, d_max=5, v_max=3, frame_rate=75, dataBase="test_data9.txt") #85
+    # x_data_list, y_data_list = loadDataFromTxt(a_max=5, d_max=5, v_max=3, frame_rate=75, dataBase="test_data10.txt") #75
+    # x_data_list, y_data_list = loadDataFromTxt(a_max=5, d_max=5, v_max=3, frame_rate=75, dataBase="test_data11.txt") #1000
     # x_data_list = x_data_list[30:60]
     # y_data_list = y_data_list[30:60]
     # x_data_list = []
@@ -65,5 +72,6 @@ if __name__ == '__main__':
     print(len(all_t))
     showImg(0, 0, all_x[:], all_vx[:], all_t[:], all_ax[:], None, None, all_y[:], all_vy[:],
             all_ay[:], 5000, 2, render=True, debug=True)
+    print(len(x_data_list))
     # showImg(x, vx, t, y, vy, 200, 1)
     # showImg(x, vx, t, y, vy, 200, 2)
