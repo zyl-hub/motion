@@ -1,10 +1,10 @@
 from utils import *
 # from compute import *
-from compute2d import compute_2d
+from compute import compute_2d
 
 
 if __name__ == '__main__':
-    # x_data_list,y_data_list = loadDataFromTxt(a_max=2,d_max=2,v_max=2,frame_rate=75)
+    x_data_list,y_data_list = loadDataFromTxt(a_max=5,d_max=5,v_max=3,frame_rate=75)
     # x_data_list = x_data_list[30:60]
     # y_data_list = y_data_list[30:60]
     # x_data_list = []
@@ -13,8 +13,8 @@ if __name__ == '__main__':
     #     x_data_list.append(y_data_list[i][:])
     # print(x_data_list)
     # print(y_data_list)
-    x_data_list = [loadData("state0","2")]
-    y_data_list = [loadData("state0","2")]
+    # x_data_list = [loadData("state3","3")]
+    # y_data_list = [loadData("state3","3")]
     # y_data_list = loadData("state2", "1")
 
     # 0:部分手输
@@ -37,7 +37,7 @@ if __name__ == '__main__':
     #     [0, 1, 0, 0, 5, 5, 10, 75]
     # ]
     x, y, vx, vy, ax, ay, t = compute_2d(
-        x_data_list, y_data_list, epoch_num=700)
+        x_data_list, y_data_list, epoch_num=2000)
     all_x += x
     all_y += y
     all_vx += vx
