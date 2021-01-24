@@ -112,13 +112,14 @@ def compute_2d(x_data_list, y_data_list, epoch_num=2000):
                 # print(y0)
                 # print(y_data_list[i][1])
                 # print(abs(vy0 / y_data_list[i][7]))
-            if abs(x0 - x_data_list[i][1]) < 0.04: # 3 * abs(vx0 / x_data_list[i][7]):
+            if abs(x0 - x_data_list[i][1]) < 0.003: # 3 * abs(vx0 / x_data_list[i][7]):
+                print("x_enough")
                 if(len(y_data_list[i]) == 0):
                     print("enough")
                     break
                 else:
-                    if abs(y0 - y_data_list[i][1]) < 0.04: # 3 * abs(vy0 / y_data_list[i][7]):
-                        print("enough")
+                    if abs(y0 - y_data_list[i][1]) < 0.003: # 3 * abs(vy0 / y_data_list[i][7]):
+                        print("y_enough")
                         break
 
             if epoch_break > epoch_num/len(x_data_list):

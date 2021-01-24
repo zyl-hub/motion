@@ -5,10 +5,10 @@ from compute import compute_2d
 
 if __name__ == '__main__':
     # x_data_list, y_data_list = loadDataFromTxt(a_max=5, d_max=5, v_max=3, frame_rate=75, dataBase="test_data4.txt") # 500
-    x_data_list, y_data_list = loadDataFromTxt(a_max=5, d_max=5, v_max=3, frame_rate=75, dataBase="test_data5.txt") # 50
+    # x_data_list, y_data_list = loadDataFromTxt(a_max=5, d_max=5, v_max=3, frame_rate=75, dataBase="test_data5.txt") # 50
     # x_data_list, y_data_list = loadDataFromTxt(a_max=5, d_max=5, v_max=3, frame_rate=75, dataBase="test_data6.txt") #30
     # x_data_list, y_data_list = loadDataFromTxt(a_max=5, d_max=5, v_max=3, frame_rate=75, dataBase="test_data7.txt") #80
-    # x_data_list,y_data_list = loadDataFromTxt(a_max=5,d_max=5,v_max=3,frame_rate=75, dataBase= "test_data8.txt") #90
+    # x_data_list, y_data_list = loadDataFromTxt(a_max=5, d_max=5, v_max=3, frame_rate=75, dataBase="test_data8.txt") #90
     # x_data_list, y_data_list = loadDataFromTxt(a_max=5, d_max=5, v_max=3, frame_rate=75, dataBase="test_data9.txt") #85
     # x_data_list, y_data_list = loadDataFromTxt(a_max=5, d_max=5, v_max=3, frame_rate=75, dataBase="test_data10.txt") #75
     # x_data_list, y_data_list = loadDataFromTxt(a_max=5, d_max=5, v_max=3, frame_rate=75, dataBase="test_data11.txt") #1000
@@ -20,8 +20,8 @@ if __name__ == '__main__':
     #     x_data_list.append(y_data_list[i][:])
     # print(x_data_list)
     # print(y_data_list)
-    # x_data_list = [loadData("state3","3")]
-    # y_data_list = [loadData("state3","3")]
+    x_data_list = [loadData("state11","3")]
+    y_data_list = [loadData("state11","3")]
     # y_data_list = loadData("state2", "1")
 
     # 0:部分手输
@@ -44,7 +44,7 @@ if __name__ == '__main__':
     #     [0, 1, 0, 0, 5, 5, 10, 75]
     # ]
     x, y, vx, vy, ax, ay, t = compute_2d(
-        x_data_list, y_data_list, epoch_num=2000)
+        x_data_list, y_data_list, epoch_num=2500)
     all_x += x
     all_y += y
     all_vx += vx
@@ -73,5 +73,6 @@ if __name__ == '__main__':
     showImg(0, 0, all_x[:], all_vx[:], all_t[:], all_ax[:], None, None, all_y[:], all_vy[:],
             all_ay[:], 5000, 2, render=True, debug=True)
     print(len(x_data_list))
+    print(all_vy)
     # showImg(x, vx, t, y, vy, 200, 1)
     # showImg(x, vx, t, y, vy, 200, 2)
