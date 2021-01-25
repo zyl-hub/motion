@@ -20,8 +20,8 @@ if __name__ == '__main__':
     #     x_data_list.append(y_data_list[i][:])
     # print(x_data_list)
     # print(y_data_list)
-    x_data_list = [loadData("state11","3")]
-    y_data_list = [loadData("state11","3")]
+    x_data_list = [loadData("state11","5")]
+    y_data_list = [loadData("state11","5")]
     # y_data_list = loadData("state2", "1")
 
     # 0:部分手输
@@ -44,7 +44,7 @@ if __name__ == '__main__':
     #     [0, 1, 0, 0, 5, 5, 10, 75]
     # ]
     x, y, vx, vy, ax, ay, t = compute_2d(
-        x_data_list, y_data_list, epoch_num=2500)
+        x_data_list, y_data_list, epoch_num=200)
     all_x += x
     all_y += y
     all_vx += vx
