@@ -41,6 +41,7 @@ void compute_motion_1d(double x, double v0, double v1, double a_max, double d_ma
         else {
             total_x_v0_to_v1 = v0 * v0 / (2 * d_max) - v1 * v1 / (2 * a_max);
         }
+
         true_x = abs(x) - 2 * v0 * delta_t;
         //true_x = abs(x) - 2 * v0 * delta_t - 9;
         //if (true_x >= 0) {

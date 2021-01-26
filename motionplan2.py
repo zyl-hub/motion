@@ -9,6 +9,9 @@ def copy_sign(a, b):
         return -abs(a)
 
 def compute_1d(x, v0, v1, a_max, d_max, v_max, frame_rate, all_info_dict):
+
+
+
     delta_t = 1 / frame_rate
 
     if math.isinf(x) or math.isinf(v0) or math.isinf(v1):
