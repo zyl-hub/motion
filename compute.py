@@ -1,4 +1,4 @@
-from motionplan2 import compute_1d
+from motionplan3 import compute_1d
 from motionplan import copy_sign
 
 
